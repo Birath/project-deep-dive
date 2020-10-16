@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/splat.png-424a3ff7924cc940bcc17b77a9935c58.stex"
+path="res://.import/normal.png-44d7afeae4f7ff44894e9fa05433867f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/terrain/splat.png"
-dest_files=[ "res://.import/splat.png-424a3ff7924cc940bcc17b77a9935c58.stex" ]
+source_file="res://assets/terrain/map_chunk0/normal.png"
+dest_files=[ "res://.import/normal.png-44d7afeae4f7ff44894e9fa05433867f.stex" ]
 
 [params]
 
