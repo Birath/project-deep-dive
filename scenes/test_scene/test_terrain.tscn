@@ -2,7 +2,7 @@
 
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=1]
 [ext_resource path="res://scenes/test_scene/freelook.gd" type="Script" id=2]
-[ext_resource path="res://assets/terrain/data.hterrain" type="Resource" id=3]
+[ext_resource path="res://assets/terrain/test_map/data.hterrain" type="Resource" id=3]
 
 [node name="Spatial" type="Spatial"]
 
