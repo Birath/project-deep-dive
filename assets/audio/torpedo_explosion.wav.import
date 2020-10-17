@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/torpedo_explosion.wav-96525f112ff5c5deb5eec0c3f0beec9c.sample"
+
+[deps]
+
+source_file="res://assets/audio/torpedo_explosion.wav"
+dest_files=[ "res://.import/torpedo_explosion.wav-96525f112ff5c5deb5eec0c3f0beec9c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
