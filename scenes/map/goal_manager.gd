@@ -76,7 +76,7 @@ func fix_minimum_distance(quadrant: int, x_range: Vector2, z_range: Vector2) -> 
 			x_range.x -= abs(source_2_pos.x - x_range.x)
 	return [x_range, z_range]
 
-func _on_node_complete(source) -> void:
+func _on_source_complete(source) -> void:
 	uncompleted_sources.remove(uncompleted_sources.find(source))
 	if current_goal == source:
 		current_goal = uncompleted_sources[randi() % uncompleted_sources.size()]
