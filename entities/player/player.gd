@@ -1,0 +1,64 @@
+extends RigidBody
+
+const speed = 10
+const rot_speed = 1
+
+var angular_vel = 0.0
+const max_angular_velocity = 0.5
+const turn_force = 5
+
+const sonar_time = 1.0
+var current_sonar = 0.0
+
+func _ready():
+	$Sonar/Active.disabled = true
+
+func _process(delta):
+	pass
+
+func _physics_process(delta):
+	get_movement_input(delta)
+	get_sonar_input(delta)
+
+func get_movement_input(delta):
+	var left = global_transform.basis.x;
+	var forward = -global_transform.basis.z;
+	if Input.is_action_pressed("forward"):
+		add_central_force(forward * speed)
+	if Input.is_action_pressed("back"):
+		add_central_force(-forward * speed)
+	if Input.is_action_pressed("up"):
+		add_central_force(Vector3.UP * speed)
+	if Input.is_action_pressed("down"):
+		add_central_force(Vector3.DOWN * speed)
+	if Input.is_action_pressed("right"):
+		add_force(Vector3.LEFT * turn_force, Vector3.BACK * 10)
+		add_force(Vector3.RIGHT * turn_force, Vector3.FORWARD * 10)
+		
+		#angular_vel = clamp(angular_vel - rot_speed * delta, 
+		#-max_angular_velocity, max_angular_velocity)
+	if Input.is_action_pressed("left"):
+		add_force(Vector3.RIGHT * turn_force, Vector3.BACK * 10)
+		add_force(Vector3.LEFT * turn_force, Vector3.FORWARD *  10)
+		
+		#angular_vel = clamp(angular_vel + rot_speed * delta, 
+		#-max_angular_velocity, max_angular_velocity)
+	#set_angular_velocity(Vector3.UP * angular_vel)
+
+func get_sonar_input(delta):
+	
+	if Input.is_action_just_pressed("sonar"):
+		print("sonar")
+		$Sonar/Active.disabled = false
+		current_sonar = sonar_time
+	elif (current_sonar <= 0.0):
+		if (!$Sonar/Active.disabled):
+			print("disable")
+		$Sonar/Active.disabled = true
+	else:
+		current_sonar -= delta
+		
+
+
+func _on_Sonar_area_entered(area):
+	print("sonar detected shit")
