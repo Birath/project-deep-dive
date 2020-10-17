@@ -11,8 +11,7 @@ var rng = RandomNumberGenerator.new()
 
 export (PackedScene) var Torpedo
 
-var target_pos = Vector3(60, 50, 90)
-#var target_pos := Vector3()
+var target_pos := Vector3()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -33,6 +32,7 @@ func _process(delta):
 		var torpedo = Torpedo.instance()
 		owner.add_child(torpedo)
 		torpedo.transform = global_transform
+		get_node("torpedo_launch").play()
 
 
 func _physics_process(delta):
@@ -64,11 +64,14 @@ func get_vertical_vector():
 
 
 func randomize_target():
+	#target_pos.x = rng.randf_range(-512, 512)
 	target_pos.x = rng.randf_range(-100, 100)
-	target_pos.y = rng.randf_range(-50, 50)
+	target_pos.y = rng.randf_range(0, 100)
+	#target_pos.z = rng.randf_range(-512, 512)
 	target_pos.z = rng.randf_range(-100, 100)
 
 
 func _on_sonar_detection_area_entered(area):
 	if "sonar" in area.get_groups():
+		print("sub detected sonar")
 		target_pos = area.transform.origin
