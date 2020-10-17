@@ -14,11 +14,12 @@ export(Color) var disabled
 
 export(int) var state_left = 0
 export(int) var state_right = 0
+var game_manager
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_left(4)
-	set_right(4)	
+	set_right(4)		
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,6 +36,8 @@ func _process(delta):
 	if state_right == 2:
 		$indicator_right2.get_surface_material(1).set_shader_param("color", color)
 		$light_right.light_color = color
+	game_manager = get_tree().get_root().get_node("/root/World/goal_manager")
+	set_arrow(game_manager.get_current_goal())
 
 func set_left(color):
 	state_left = color
@@ -58,3 +61,12 @@ func get_color(index):
 		3: return red
 		3: return disabled
 	return Color(0, 0, 0)
+
+func set_arrow(position: Vector3) -> void:
+	var global = global_transform
+	var origin = global.origin
+	var basis = global.basis
+	var pos = Vector2(position.x, position.z) 
+	var towards = pos.direction_to(Vector2(origin.x, origin.z))
+	var angle = Vector2(basis.z.x, basis.z.z).angle_to(towards)
+	$map_viewport/Viewport/map/arrow.set_rotation(-angle + PI)
