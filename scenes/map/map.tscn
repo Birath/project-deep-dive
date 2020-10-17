@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/terrain/map_chunk2/data.hterrain" type="Resource" id=6]
 [ext_resource path="res://assets/terrain/map_chunk3/data.hterrain" type="Resource" id=7]
 
-[node name="root" type="Spatial"]
+[node name="map_root" type="Spatial"]
 
 [node name="chunk0" type="Spatial" parent="."]
 script = ExtResource( 1 )
