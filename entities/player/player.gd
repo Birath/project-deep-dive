@@ -7,8 +7,10 @@ var angular_vel = 0.0
 const max_angular_velocity = 0.5
 const turn_force = 5
 
-const sonar_time = 1.0
+export(float) var sonar_time = 0.5
+export(float) var sonar_cooldown = 10.0
 var current_sonar = 0.0
+var current_sonar_cooldown = 0.0
 
 func _ready():
 	$Sonar/Active.disabled = true
@@ -47,17 +49,16 @@ func get_movement_input(delta):
 
 func get_sonar_input(delta):
 	
-	if Input.is_action_just_pressed("sonar"):
+	if Input.is_action_just_pressed("sonar") and current_sonar_cooldown <= 0.0:
 		print("sonar")
 		$Sonar/Active.disabled = false
 		current_sonar = sonar_time
+		current_sonar_cooldown = sonar_cooldown
 	elif (current_sonar <= 0.0):
-		if (!$Sonar/Active.disabled):
-			print("disable")
 		$Sonar/Active.disabled = true
 	else:
 		current_sonar -= delta
-		
+	current_sonar_cooldown -= delta
 
 
 func _on_Sonar_area_entered(area):
