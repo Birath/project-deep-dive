@@ -25,11 +25,13 @@ object_material = ExtResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
 current = true
-far = 500.0
+far = 2000.0
 script = ExtResource( 3 )
 
 [node name="submarine_interior" parent="." instance=ExtResource( 5 )]
 disabled = Color( 0.101961, 0.101961, 0.101961, 1 )
+state_left = 0
+state_right = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00617123, -0.0105028, 4.35129 )
