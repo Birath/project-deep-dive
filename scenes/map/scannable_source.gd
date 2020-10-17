@@ -16,14 +16,14 @@ func get_is_complete() -> bool:
 	return is_complete 
 
 func get_size() -> Vector2:
-	return Vector2(columns * distance_between_nodes, rows * distance_between_nodes)
+	return Vector2((columns - 1) * distance_between_nodes, (rows-1) * distance_between_nodes)
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:	
 	for col in range(columns):
 		for row in range(rows):
 			var new_node: ScannableNode = ScanNode.instance()
-			new_node.translate(Vector3(col*distance_between_nodes, 0, row*distance_between_nodes))
+			new_node.translate(Vector3((col - columns / 2)*distance_between_nodes, 0, (row - rows/2)*distance_between_nodes))
 			self.add_child(new_node)
 			new_node.connect("fully_scanned", self, "_on_node_scanned")
 
@@ -35,5 +35,5 @@ func _on_node_scanned(node: ScannableNode) -> void:
 	scanned_nodes += 1
 	if scanned_nodes == columns * rows:
 		print("All nodes scanned")
-		emit_signal("complete")
+		emit_signal("complete", self)
 	

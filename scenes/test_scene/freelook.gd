@@ -39,22 +39,22 @@ func _physics_process(delta):
 
 	# Movement
 
-	if Input.is_action_pressed("move_forward"):
+	if Input.is_action_pressed("forward"):
 		velocity.x -= MOVE_SPEED*speed*delta
 
-	if Input.is_action_pressed("move_backward"):
+	if Input.is_action_pressed("backward"):
 		velocity.x += MOVE_SPEED*speed*delta
 
-	if Input.is_action_pressed("move_left"):
+	if Input.is_action_pressed("left"):
 		velocity.z += MOVE_SPEED*speed*delta
 
-	if Input.is_action_pressed("move_right"):
+	if Input.is_action_pressed("right"):
 		velocity.z -= MOVE_SPEED*speed*delta
 
-	if Input.is_action_pressed("move_up"):
+	if Input.is_action_pressed("up"):
 		velocity.y += MOVE_SPEED*speed*delta
 
-	if Input.is_action_pressed("move_down"):
+	if Input.is_action_pressed("down"):
 		velocity.y -= MOVE_SPEED*speed*delta
 
 	# Friction
