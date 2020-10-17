@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=1]
 [ext_resource path="res://assets/terrain/map_chunk0/data.hterrain" type="Resource" id=2]
@@ -7,8 +7,10 @@
 [ext_resource path="res://assets/terrain/map_chunk1/data.hterrain" type="Resource" id=5]
 [ext_resource path="res://assets/terrain/map_chunk2/data.hterrain" type="Resource" id=6]
 [ext_resource path="res://assets/terrain/map_chunk3/data.hterrain" type="Resource" id=7]
+[ext_resource path="res://scenes/map/map.gd" type="Script" id=8]
 
 [node name="map_root" type="Spatial"]
+script = ExtResource( 8 )
 
 [node name="chunk0" type="Spatial" parent="."]
 script = ExtResource( 1 )
@@ -16,12 +18,13 @@ _terrain_data = ExtResource( 2 )
 chunk_size = 32
 shader_type = "Custom"
 custom_shader = ExtResource( 3 )
-shader_params/maxDist = 50.0
-shader_params/size = 0.5
-shader_params/fadeSpeed = 2.0
-shader_params/fade = 0.0
-shader_params/fadeFunc = 4.0
-shader_params/lineFunc = 4.0
+shader_params/Time = null
+shader_params/pos0 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos1 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos2 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos3 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos4 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos5 = Vector3( 1e+06, 1e+06, 1e+06 )
 ground/albedo_bump_0 = null
 ground/normal_roughness_0 = null
 ground/albedo_bump_1 = null
@@ -38,12 +41,13 @@ _terrain_data = ExtResource( 5 )
 chunk_size = 32
 shader_type = "Custom"
 custom_shader = ExtResource( 3 )
-shader_params/maxDist = 50.0
-shader_params/size = 0.5
-shader_params/fadeSpeed = 2.0
-shader_params/fade = 0.0
-shader_params/fadeFunc = 4.0
-shader_params/lineFunc = 4.0
+shader_params/Time = null
+shader_params/pos0 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos1 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos2 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos3 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos4 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos5 = Vector3( 1e+06, 1e+06, 1e+06 )
 ground/albedo_bump_0 = null
 ground/normal_roughness_0 = null
 ground/albedo_bump_1 = null
@@ -60,12 +64,13 @@ _terrain_data = ExtResource( 6 )
 chunk_size = 32
 shader_type = "Custom"
 custom_shader = ExtResource( 3 )
-shader_params/maxDist = 50.0
-shader_params/size = 0.5
-shader_params/fadeSpeed = 2.0
-shader_params/fade = 0.0
-shader_params/fadeFunc = 4.0
-shader_params/lineFunc = 4.0
+shader_params/Time = null
+shader_params/pos0 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos1 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos2 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos3 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos4 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos5 = Vector3( 1e+06, 1e+06, 1e+06 )
 ground/albedo_bump_0 = null
 ground/normal_roughness_0 = null
 ground/albedo_bump_1 = null
@@ -82,12 +87,13 @@ _terrain_data = ExtResource( 7 )
 chunk_size = 32
 shader_type = "Custom"
 custom_shader = ExtResource( 3 )
-shader_params/maxDist = 50.0
-shader_params/size = 0.5
-shader_params/fadeSpeed = 2.0
-shader_params/fade = 0.0
-shader_params/fadeFunc = 4.0
-shader_params/lineFunc = 4.0
+shader_params/Time = null
+shader_params/pos0 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos1 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos2 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos3 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos4 = Vector3( 1e+06, 1e+06, 1e+06 )
+shader_params/pos5 = Vector3( 1e+06, 1e+06, 1e+06 )
 ground/albedo_bump_0 = null
 ground/normal_roughness_0 = null
 ground/albedo_bump_1 = null

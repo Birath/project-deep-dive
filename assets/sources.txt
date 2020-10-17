@@ -4,3 +4,6 @@ Audio:
 130506__duckduckpony__large-vessel.wav - https://freesound.org/people/duckduckpony/sounds/130506/
 184274__qubodup__launching-anti-tank-missiles.flac - https://freesound.org/people/qubodup/sounds/184274/
 235968__tommccann__explosion-01.wav - https://freesound.org/people/tommccann/sounds/235968/
+214663__hykenfreak__deep-space-ship-effect.mp3 - https://freesound.org/people/hykenfreak/sounds/214663/
+135774__setuniman__splash-sw3.wav - https://freesound.org/people/Setuniman/sounds/135774/
+147876__zesoundresearchinc__depthbomb-01.aiff - https://freesound.org/people/ZeSoundResearchInc./sounds/147876/
