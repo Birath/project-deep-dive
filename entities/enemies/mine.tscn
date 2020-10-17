@@ -1,0 +1,208 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://shaders/chain.tres" type="Material" id=1]
+[ext_resource path="res://assets/enemies/mine.fbx" type="PackedScene" id=2]
+
+[sub_resource type="VisualShaderNodeColorConstant" id=1]
+constant = Color( 0, 0, 0, 1 )
+
+[sub_resource type="VisualShader" id=2]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx, unshaded;
+
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Color:2
+	vec3 n_out2p0 = vec3(0.000000, 0.000000, 0.000000);
+	float n_out2p1 = 1.000000;
+
+// Output:0
+	ALBEDO = n_out2p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -197.031, -82.55 )
+flags/unshaded = true
+nodes/fragment/2/node = SubResource( 1 )
+nodes/fragment/2/position = Vector2( 20, 160 )
+nodes/fragment/connections = PoolIntArray( 2, 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+
+[sub_resource type="VisualShaderNodeCompare" id=4]
+default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 0.9, 0.9, 1 ), 2, 1e-05 ]
+type = 1
+function = 5
+
+[sub_resource type="VisualShaderNodeVectorOp" id=5]
+output_port_for_preview = 0
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=6]
+uniform_name = "width"
+
+[sub_resource type="VisualShaderNodeVectorCompose" id=7]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=8]
+default_input_values = [ 0, 1.0, 1, 0.0 ]
+operator = 1
+
+[sub_resource type="VisualShaderNodeVectorCompose" id=9]
+default_input_values = [ 0, 0.0, 1, 0.0, 2, 1.0 ]
+
+[sub_resource type="VisualShaderNodeColorUniform" id=10]
+uniform_name = "wire_color"
+
+[sub_resource type="VisualShaderNodeInput" id=11]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeSwitch" id=12]
+
+[sub_resource type="VisualShaderNodeColorConstant" id=13]
+constant = Color( 0, 0, 0, 1 )
+
+[sub_resource type="VisualShaderNodeCompare" id=14]
+output_port_for_preview = 0
+default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 0.1, 0.1, 0 ), 2, 1e-05 ]
+type = 1
+function = 3
+
+[sub_resource type="VisualShader" id=15]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx, unshaded;
+
+uniform float width;
+uniform vec4 wire_color : hint_color;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:2
+	vec3 n_out2p0 = vec3(UV, 0.0);
+
+// ScalarUniform:15
+	float n_out15p0 = width;
+
+// ScalarOp:17
+	float n_in17p0 = 1.00000;
+	float n_out17p0 = n_in17p0 - n_out15p0;
+
+// VectorCompose:18
+	float n_in18p2 = 1.00000;
+	vec3 n_out18p0 = vec3(n_out17p0, n_out17p0, n_in18p2);
+
+// Compare:10
+	bool n_out10p0;
+	{
+		bvec3 _bv = lessThanEqual(n_out2p0, n_out18p0);
+		n_out10p0 = all(_bv);
+	}
+
+// VectorCompose:16
+	float n_in16p2 = 0.00000;
+	vec3 n_out16p0 = vec3(n_out15p0, n_out15p0, n_in16p2);
+
+// Compare:9
+	bool n_out9p0;
+	{
+		bvec3 _bv = greaterThanEqual(n_out2p0, n_out16p0);
+		n_out9p0 = all(_bv);
+	}
+
+// VectorOp:12
+	vec3 n_out12p0 = vec3(n_out10p0 ? 1.0 : 0.0) * vec3(n_out9p0 ? 1.0 : 0.0);
+
+// Color:7
+	vec3 n_out7p0 = vec3(0.000000, 0.000000, 0.000000);
+	float n_out7p1 = 1.000000;
+
+// ColorUniform:19
+	vec3 n_out19p0 = wire_color.rgb;
+	float n_out19p1 = wire_color.a;
+
+// VectorSwitch:3
+	vec3 n_out3p0;
+	if(all(bvec3(n_out12p0)))
+	{
+		n_out3p0 = n_out7p0;
+	}
+	else
+	{
+		n_out3p0 = n_out19p0;
+	}
+
+// Output:0
+	ALBEDO = n_out3p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -197.031, 72.95 )
+flags/unshaded = true
+nodes/fragment/0/position = Vector2( 400, 380 )
+nodes/fragment/2/node = SubResource( 11 )
+nodes/fragment/2/position = Vector2( -2100, -440 )
+nodes/fragment/3/node = SubResource( 12 )
+nodes/fragment/3/position = Vector2( -600, 380 )
+nodes/fragment/7/node = SubResource( 13 )
+nodes/fragment/7/position = Vector2( -1040, 380 )
+nodes/fragment/9/node = SubResource( 14 )
+nodes/fragment/9/position = Vector2( -1760, 40 )
+nodes/fragment/10/node = SubResource( 4 )
+nodes/fragment/10/position = Vector2( -1760, -300 )
+nodes/fragment/12/node = SubResource( 5 )
+nodes/fragment/12/position = Vector2( -1320, -300 )
+nodes/fragment/15/node = SubResource( 6 )
+nodes/fragment/15/position = Vector2( -2540, -80 )
+nodes/fragment/16/node = SubResource( 7 )
+nodes/fragment/16/position = Vector2( -2180, -80 )
+nodes/fragment/17/node = SubResource( 8 )
+nodes/fragment/17/position = Vector2( -2540, -300 )
+nodes/fragment/18/node = SubResource( 9 )
+nodes/fragment/18/position = Vector2( -2180, -300 )
+nodes/fragment/19/node = SubResource( 10 )
+nodes/fragment/19/position = Vector2( -1040, 560 )
+nodes/fragment/connections = PoolIntArray( 10, 0, 12, 0, 9, 0, 12, 1, 12, 0, 3, 0, 15, 0, 16, 0, 16, 0, 9, 1, 15, 0, 16, 1, 15, 0, 17, 1, 17, 0, 18, 0, 17, 0, 18, 1, 18, 0, 10, 1, 19, 0, 3, 2, 7, 0, 3, 1, 3, 0, 0, 0, 2, 0, 10, 0, 2, 0, 9, 0 )
+nodes/light/0/position = Vector2( 400, 160 )
+
+[sub_resource type="ShaderMaterial" id=16]
+shader = SubResource( 15 )
+shader_param/width = 0.05
+shader_param/wire_color = Color( 1, 0, 0, 1 )
+
+[node name="mine" instance=ExtResource( 2 )]
+
+[node name="Spikes2" parent="." index="0"]
+transform = Transform( 100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 0.0150194, 0.0395632, -0.0115004 )
+material/0 = SubResource( 3 )
+
+[node name="ChainY2" parent="." index="1"]
+material/0 = ExtResource( 1 )
+
+[node name="ChainX2" parent="." index="2"]
+material/0 = ExtResource( 1 )
+
+[node name="Core2" parent="." index="3"]
+material/0 = SubResource( 16 )

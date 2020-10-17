@@ -8,7 +8,7 @@ const max_angular_velocity = 0.5
 const turn_force = 5
 
 export(float) var sonar_time = 0.5
-export(float) var sonar_cooldown = 10.0
+export(float) var sonar_cooldown = 5.0
 var current_sonar = 0.0
 var current_sonar_cooldown = 0.0
 
@@ -36,32 +36,36 @@ func get_movement_input(delta):
 	if Input.is_action_pressed("right"):
 		add_force(Vector3.LEFT * turn_force, Vector3.BACK * 10)
 		add_force(Vector3.RIGHT * turn_force, Vector3.FORWARD * 10)
-		
-		#angular_vel = clamp(angular_vel - rot_speed * delta, 
+
+		#angular_vel = clamp(angular_vel - rot_speed * delta,
 		#-max_angular_velocity, max_angular_velocity)
 	if Input.is_action_pressed("left"):
 		add_force(Vector3.RIGHT * turn_force, Vector3.BACK * 10)
 		add_force(Vector3.LEFT * turn_force, Vector3.FORWARD *  10)
-		#angular_vel = clamp(angular_vel + rot_speed * delta, 
+		#angular_vel = clamp(angular_vel + rot_speed * delta,
 		#-max_angular_velocity, max_angular_velocity)
 	#set_angular_velocity(Vector3.UP * angular_vel)
 
 func get_sonar_input(delta):
-	
+
 	if Input.is_action_just_pressed("sonar") and current_sonar_cooldown <= 0.0:
-		print("sonar")
 		$Sonar/Active.disabled = false
+		$SonarPing.play()
 		current_sonar = sonar_time
 		current_sonar_cooldown = sonar_cooldown
 		var map = get_node("../root")
 		var trans = global_transform.origin;
 		var pos = Vector2(trans.x, trans.z)
 		map._send_sonar(pos)
-	elif (current_sonar <= 0.0):
+		$submarine_interior.set_right(1)
+	elif (current_sonar <= 0.0 && !$Sonar/Active.disabled):
 		$Sonar/Active.disabled = true
+		$submarine_interior.set_right(2)
 	else:
 		current_sonar -= delta
 	current_sonar_cooldown -= delta
+	if (current_sonar_cooldown <= 0.0):
+		$submarine_interior.set_right(0)
 
 
 func _on_Sonar_area_entered(area):
