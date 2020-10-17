@@ -1,8 +1,8 @@
 extends RigidBody
 
 
-export var FORWARD_SPEED = 3
-export var TURNING_SPEED = 2
+export var FORWARD_SPEED = 5
+export var TURNING_SPEED = 3
 
 var TARGET_GOAL_DISTANCE = 10
 
@@ -32,7 +32,7 @@ func _process(delta):
 		var depth_charge = Depth_charge.instance()
 		owner.add_child(depth_charge)
 		depth_charge.transform = global_transform
-		#get_node("torpedo_launch").play()
+		get_node("depth_charge_drop").play()
 
 
 func _physics_process(delta):

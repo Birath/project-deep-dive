@@ -1,7 +1,7 @@
 extends RigidBody
 
 
-export var SINK_SPEED = 5
+export var SINK_SPEED = 2
 
 var target_position := Vector3()
 
@@ -15,15 +15,17 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var target_distance = (target_position - transform.origin).length()
-	if target_distance < TARGET_GOAL_DISTANCE:
-		#get_node("explosion_sound").play()
-		queue_free()
+	pass
 
 
 func _physics_process(delta):
 		# Sinking force
 		add_central_force(get_vertical_vector() * SINK_SPEED)
+		
+		var target_distance = (target_position - transform.origin).length()
+		if target_distance < TARGET_GOAL_DISTANCE or transform.origin.y <= 0:
+			get_node("explosion_sound").play()
+			queue_free()
 
 
 func get_vertical_vector():

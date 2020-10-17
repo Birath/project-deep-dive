@@ -2,8 +2,9 @@
 
 [ext_resource path="res://entities/player/player.gd" type="Script" id=2]
 [ext_resource path="res://entities/player/camera.gd" type="Script" id=3]
-[ext_resource path="res://assets/audio/28693__infobandit__sonar.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/audio/sonar.wav" type="AudioStream" id=4]
 [ext_resource path="res://entities/player/submarine_interior.tscn" type="PackedScene" id=5]
+
 
 [sub_resource type="CapsuleShape" id=1]
 height = 9.0
