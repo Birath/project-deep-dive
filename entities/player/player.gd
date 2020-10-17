@@ -52,6 +52,7 @@ func get_sonar_input(delta):
 	if Input.is_action_just_pressed("sonar") and current_sonar_cooldown <= 0.0:
 		print("sonar")
 		$Sonar/Active.disabled = false
+		$SonarPing.play()
 		current_sonar = sonar_time
 		current_sonar_cooldown = sonar_cooldown
 	elif (current_sonar <= 0.0):
