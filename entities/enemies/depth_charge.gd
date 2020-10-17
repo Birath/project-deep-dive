@@ -4,7 +4,6 @@ extends RigidBody
 export var SINK_SPEED = 3
 
 var has_exploded = false
-var TARGET_GOAL_DISTANCE = 6
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
