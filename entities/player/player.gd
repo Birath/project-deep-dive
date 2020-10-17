@@ -59,7 +59,7 @@ func get_sonar_input(delta):
 		current_sonar_cooldown = sonar_cooldown
 		var map = get_node("../root")
 		var trans = global_transform.origin;
-		var pos = Vector2(trans.x, trans.z)
+		var pos = Vector3(trans.x, trans.y, trans.z)
 		map._send_sonar(pos)
 		$submarine_interior.set_right(1)
 	elif (current_sonar <= 0.0 && !$Sonar/Active.disabled):
