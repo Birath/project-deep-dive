@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/enemies/depth_charge.fbx" type="PackedScene" id=1]
+[ext_resource path="res://entities/enemies/depth_charge.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.272266
+height = 0.892756
+
+[node name="depth_charge" type="RigidBody"]
+collision_layer = 512
+collision_mask = 512
+script = ExtResource( 2 )
+
+[node name="model" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+
+[node name="depth_charge_shape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, 0 )
+shape = SubResource( 1 )
