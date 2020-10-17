@@ -18,13 +18,20 @@ func _ready():
 	$Sonar/Active.disabled = true
 
 func _process(delta):
-	pass
+	object_material.set_shader_param("Time", OS.get_ticks_msec())
+	
 
 func _physics_process(delta):
 	get_movement_input(delta)
 	get_sonar_input(delta)
+	if Input.is_action_just_pressed("emergency"):
+		var en = $DangerLight.enabled
+		$DangerLight.enabled = !en
+		if !en:
+			$Alarm.play()
+		else:
+			$Alarm.stop()
 	
-	object_material.set_shader_param("ping", global_transform.origin)
 
 func get_movement_input(delta):
 	var left = global_transform.basis.x;
@@ -50,6 +57,9 @@ func get_movement_input(delta):
 		#-max_angular_velocity, max_angular_velocity)
 	#set_angular_velocity(Vector3.UP * angular_vel)
 
+var sonar_index = 0
+const SONAR_INDEX_MAX = 6
+
 func get_sonar_input(delta):
 
 	if Input.is_action_just_pressed("sonar") and current_sonar_cooldown <= 0.0:
@@ -61,6 +71,11 @@ func get_sonar_input(delta):
 		var trans = global_transform.origin;
 		var pos = Vector3(trans.x, trans.y, trans.z)
 		map._send_sonar(pos)
+		
+		object_material.set_shader_param("pos" + str(sonar_index), global_transform.origin)
+		object_material.set_shader_param("time" + str(sonar_index), OS.get_ticks_msec())
+		sonar_index = (sonar_index + 1) % SONAR_INDEX_MAX
+		
 		$submarine_interior.set_right(1)
 	elif (current_sonar <= 0.0 && !$Sonar/Active.disabled):
 		$Sonar/Active.disabled = true
