@@ -2,13 +2,18 @@ extends Spatial
 
 const ScanNode = preload("res://scenes/map/scannable_node.tscn")
 
+signal complete
+
 export(int) var columns = 5
 export(int) var rows = 5
 export(int) var distance_between_nodes = 20
 
 var completed_nodes: Array = []
 var scanned_nodes := 0
-var is_all_nodes_scanned := false
+var is_complete := false setget , get_is_complete 
+
+func get_is_complete() -> bool:
+	return is_complete 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:	
@@ -27,4 +32,5 @@ func _on_node_scanned(node: ScannableNode) -> void:
 	scanned_nodes += 1
 	if scanned_nodes == columns * rows:
 		print("All nodes scanned")
+		emit_signal("complete")
 	

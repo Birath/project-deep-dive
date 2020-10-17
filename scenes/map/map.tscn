@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=1]
 [ext_resource path="res://assets/terrain/map_chunk0/data.hterrain" type="Resource" id=2]
 [ext_resource path="res://shaders/wireframe.shader" type="Shader" id=3]
+[ext_resource path="res://scenes/map/goal_manager.gd" type="Script" id=4]
 [ext_resource path="res://assets/terrain/map_chunk1/data.hterrain" type="Resource" id=5]
 [ext_resource path="res://assets/terrain/map_chunk2/data.hterrain" type="Resource" id=6]
 [ext_resource path="res://assets/terrain/map_chunk3/data.hterrain" type="Resource" id=7]
@@ -95,3 +96,6 @@ ground/albedo_bump_2 = null
 ground/normal_roughness_2 = null
 ground/albedo_bump_3 = null
 ground/normal_roughness_3 = null
+
+[node name="goal_manager" type="Spatial" parent="."]
+script = ExtResource( 4 )
