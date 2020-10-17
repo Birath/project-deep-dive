@@ -1,18 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://scenes/map/scannable_source.gd" type="Script" id=1]
-[ext_resource path="res://entities/enemies/enemy_sub.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/test_scene/freelook.gd" type="Script" id=3]
 
 [node name="spawner" type="Spatial"]
 script = ExtResource( 1 )
-
-[node name="sub" parent="." instance=ExtResource( 2 )]
-axis_lock_linear_x = true
-axis_lock_linear_y = true
-axis_lock_linear_z = true
-
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( -1, -3.25841e-07, 1.62921e-07, 1.62921e-07, 2.65431e-14, 1, -3.25841e-07, 1, 2.65431e-14, 0, 100, 0 )
-far = 259.3
-script = ExtResource( 3 )
