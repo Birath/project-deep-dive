@@ -22,9 +22,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var target_distance = target_position - transform.origin
-	target_distance.y = 0
-	if target_distance.length() < TARGET_GOAL_DISTANCE:
+	var target_distance = Vector3(0, global_transform.origin.y, 0)
+	target_distance = target_position.distance_to(global_transform.origin)
+	if target_distance < TARGET_GOAL_DISTANCE:
 		if should_drop_charge:
 			drop_depth_charge()
 			
@@ -46,7 +46,7 @@ func get_forward_vector():
 
 
 func get_horizontal_vector():
-	var horizontal_vector = target_position - transform.origin
+	var horizontal_vector = target_position - global_transform.origin
 	horizontal_vector.y = 0
 	return horizontal_vector.normalized() * -1
 
@@ -70,4 +70,4 @@ func _on_sonar_detection_area_entered(area):
 	if "sonar" in area.get_groups():
 		print("ship detected sonar")
 		should_drop_charge = true
-		target_position = area.transform.origin
+		target_position = area.global_transform.origin
