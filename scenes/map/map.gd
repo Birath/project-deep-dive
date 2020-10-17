@@ -1,9 +1,7 @@
 extends Spatial
 
-var sonarPoints = [];
-var sonarTimes = [];
-
 var chunks = [];
+var step = 0;
 
 func _ready():
 	chunks.push_back(get_node("chunk0"));
@@ -20,15 +18,10 @@ func _process(delta):
 		chunk._material.set_shader_param("Time", time);
 
 func _send_sonar(var pos : Vector3):
+	step = (step + 1) % 6;
 	var time = OS.get_ticks_msec();
-	sonarPoints.push_back(pos);
-	sonarTimes.push_back(time);
-	if sonarPoints.size() > 6:
-		sonarPoints.pop_front();
-		sonarTimes.pop_front();
 	for chunk in chunks:
-		for i in range(sonarPoints.size()):
-			chunk._material.set_shader_param("pos"+str(i), sonarPoints[i]);
-			chunk._material.set_shader_param("time"+str(i), sonarTimes[i]);
+		chunk._material.set_shader_param("pos"+str(step), pos);
+		chunk._material.set_shader_param("time"+str(step), time);
 	
 	
