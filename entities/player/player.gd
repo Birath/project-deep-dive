@@ -12,6 +12,8 @@ export(float) var sonar_cooldown = 5.0
 var current_sonar = 0.0
 var current_sonar_cooldown = 0.0
 
+export(ShaderMaterial) var object_material
+
 func _ready():
 	$Sonar/Active.disabled = true
 
@@ -21,6 +23,8 @@ func _process(delta):
 func _physics_process(delta):
 	get_movement_input(delta)
 	get_sonar_input(delta)
+	
+	object_material.set_shader_param("ping", global_transform.origin)
 
 func get_movement_input(delta):
 	var left = global_transform.basis.x;

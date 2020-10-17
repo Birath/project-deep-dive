@@ -1,9 +1,8 @@
 extends RigidBody
 
 
-export var SINK_SPEED = 2
-
-var target_position := Vector3()
+export var SINK_SPEED = 3
+export var target_position := Vector3()
 
 var TARGET_GOAL_DISTANCE = 10
 

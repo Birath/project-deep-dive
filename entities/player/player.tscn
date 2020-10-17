@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
+[ext_resource path="res://shaders/object_wireframe.tres" type="Material" id=1]
 [ext_resource path="res://entities/player/player.gd" type="Script" id=2]
 [ext_resource path="res://entities/player/camera.gd" type="Script" id=3]
 [ext_resource path="res://assets/audio/sonar.wav" type="AudioStream" id=4]
 [ext_resource path="res://entities/player/submarine_interior.tscn" type="PackedScene" id=5]
-
+[ext_resource path="res://entities/player/danger_light.gd" type="Script" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 9.0
@@ -19,8 +20,7 @@ axis_lock_angular_z = true
 linear_damp = 1.0
 angular_damp = 10.0
 script = ExtResource( 2 )
-sonar_time = 0.5
-sonar_cooldown = 5.0
+object_material = ExtResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
 current = true
@@ -46,4 +46,11 @@ disabled = true
 
 [node name="SonarPing" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+
+[node name="DangerLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.537222, 0 )
+light_color = Color( 1, 0, 0, 1 )
+light_energy = 16.0
+omni_range = 1.63234
+script = ExtResource( 6 )
 [connection signal="area_entered" from="Sonar" to="." method="_on_Sonar_area_entered"]
