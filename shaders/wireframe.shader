@@ -20,8 +20,7 @@ uniform float time5;
 
 const float maxDist = 100.;
 const float size = 0.4;
-const float deep = 1000.;
-const float fadeSpeed = 0.02;
+const float pingSpeed = 0.02;
 
 void vertex() {
 	vec2 cell_coords = (u_terrain_inverse_transform * WORLD_MATRIX * vec4(VERTEX, 1)).xz;
@@ -47,14 +46,13 @@ void fragment() {
 	float time[] = {time0, time1, time2, time3, time4, time5};
 	for (int i = 0; i < sonar.length(); i++) {
 		float dist = length(sonar[i]-coord);
+		float sizeDist = dist*size;
+		float line = abs(fract(sizeDist - 0.5) - 0.5) / fwidth(sizeDist);
 		
-		float line = abs(fract(dist - 0.5) - 0.5) / fwidth(dist);
-		
-		float t = fadeSpeed*(Time-time[i]);
-//		float beep = exp(-pow(dist-t,2.)/10.)*(1.-step(t, dist));
+		float t = pingSpeed*(Time-time[i]);
 		float beep = clamp(1.-abs(dist-t), 0., 1.);
 		beep += clamp((t-dist), 0., 0.3);
-		beep *= clamp((maxDist-t)/200., 0., 1.);
+		beep *= clamp(1.-(t-maxDist)*pingSpeed, 0., 1.);
 		color +=  (1. - min(line, 1.))*beep;
 	}
 	ALBEDO = vec3(0., color, 0.);
