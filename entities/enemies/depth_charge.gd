@@ -2,13 +2,12 @@ extends RigidBody
 
 
 export var SINK_SPEED = 3
-export var target_position := Vector3()
 
-var TARGET_GOAL_DISTANCE = 10
+var has_exploded = false
+var TARGET_GOAL_DISTANCE = 6
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# get player position
 	set_linear_velocity(Vector3.ZERO)
 
 
@@ -20,12 +19,27 @@ func _process(delta):
 func _physics_process(delta):
 		# Sinking force
 		add_central_force(get_vertical_vector() * SINK_SPEED)
-		
-		var target_distance = (target_position - transform.origin).length()
-		if target_distance < TARGET_GOAL_DISTANCE or transform.origin.y <= 0:
-			get_node("explosion_sound").play()
-			queue_free()
 
 
 func get_vertical_vector():
 	return -global_transform.basis.y
+
+
+func explode():
+	if not has_exploded:
+		has_exploded = true
+		get_node("explosion_sound").play()
+		set_process(false)
+
+
+func _on_collision_area_body_entered(body):
+	print("depth charge hit something")
+	if body.get_name() == "Player":
+		print("hit player")
+		#TODO remove?
+	
+	explode()
+
+
+func _on_explosion_sound_finished():
+	queue_free()

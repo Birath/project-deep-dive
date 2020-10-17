@@ -11,7 +11,6 @@ var rng = RandomNumberGenerator.new()
 export (PackedScene) var Depth_charge
 
 var target_position := Vector3()
-var sonar_position := Vector3()
 
 var should_drop_charge = false
 
@@ -64,7 +63,6 @@ func drop_depth_charge():
 	var depth_charge = Depth_charge.instance()
 	owner.add_child(depth_charge)
 	depth_charge.transform = global_transform
-	depth_charge.target_position = sonar_position
 	get_node("depth_charge_drop").play()
 
 
@@ -73,4 +71,3 @@ func _on_sonar_detection_area_entered(area):
 		print("ship detected sonar")
 		should_drop_charge = true
 		target_position = area.transform.origin
-		sonar_position = area.transform.origin

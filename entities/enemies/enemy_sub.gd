@@ -1,11 +1,11 @@
 extends RigidBody
 
 
-export var FORWARD_SPEED = 5
+export var FORWARD_SPEED = 3
 export var TURNING_SPEED = 1
 export var VERTICAL_SPEED = 1
 
-var TARGET_GOAL_DISTANCE = 10
+var TARGET_GOAL_DISTANCE = 4
 var TORPEDO_LAUNCH_DISTANCE = 50
 
 var rng = RandomNumberGenerator.new()
@@ -23,13 +23,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var target_distance = (target_position - transform.origin).length()
+	var target_distance = target_position.distance_to(global_transform.origin)
 	if target_distance < TARGET_GOAL_DISTANCE:
 		print("Reached target")
 		randomize_target()
 		print("New target: ", target_position)
-		
-		launch_torpedo()
 
 
 func _physics_process(delta):
@@ -48,14 +46,14 @@ func get_forward_vector():
 
 
 func get_horizontal_vector():
-	var horizontal_vector = target_position - transform.origin
+	var horizontal_vector = target_position - global_transform.origin
 	horizontal_vector.y = 0
 	return horizontal_vector.normalized() * -1
 
 
 func get_vertical_vector():
-	var vertical_vector = Vector3(0, target_position.y - transform.origin.y, 0)
-	if vertical_vector.y < 0.1:
+	var vertical_vector = Vector3(0, target_position.y - global_transform.origin.y, 0)
+	if abs(vertical_vector.y) < 0.1:
 		return Vector3.ZERO
 	return vertical_vector.normalized()
 
@@ -78,13 +76,14 @@ func launch_torpedo():
 
 func should_launch_torpedo(sonar_position):
 	# TODO add angle check?
-	return (sonar_position - transform.origin).length() < TORPEDO_LAUNCH_DISTANCE
+	return sonar_position.distance_to(global_transform.origin) < TORPEDO_LAUNCH_DISTANCE
 
 
 func _on_sonar_detection_area_entered(area):
 	if "sonar" in area.get_groups():
 		print("sub detected sonar")
-		target_position = area.transform.origin
+		target_position = area.global_transform.origin
 		
 		if should_launch_torpedo(target_position):
 			launch_torpedo()
+			pass
