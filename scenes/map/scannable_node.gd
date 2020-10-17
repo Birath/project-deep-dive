@@ -3,7 +3,7 @@ class_name ScannableNode
 
 signal fully_scanned
 
-export(int) var scans_required = 3
+export(int) var scans_required = 1
 
 var is_scanned := false
 var times_scanned := 0
@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func scan() -> void:
 	times_scanned += 1
-	if !is_scanned && times_scanned == scans_required:
+	if !is_scanned && times_scanned >= scans_required:
 		emit_signal("fully_scanned", self)
 		is_scanned = true
 	
