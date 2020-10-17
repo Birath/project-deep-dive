@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/map/map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/map/scannable_source.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/test_scene/freelook.gd" type="Script" id=3]
+[ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=4]
 
 [sub_resource type="SphereShape" id=1]
 radius = 2.0
@@ -13,7 +14,10 @@ radius = 2.0
 
 [node name="spawner" parent="." instance=ExtResource( 2 )]
 
+[node name="Player" parent="." instance=ExtResource( 4 )]
+
 [node name="Camera" type="Camera" parent="."]
+visible = false
 script = ExtResource( 3 )
 
 [node name="Area" type="Area" parent="Camera" groups=[
