@@ -20,15 +20,15 @@ func _input(event):
 		rotation.x = clamp(rotation.x - event.relative.y*MOUSE_SENSITIVITY, deg2rad(-90), deg2rad(90))
 
 	# Toggle HUD
-	if event.is_action_pressed("toggle_hud"):
-		$"../FPSCounter".visible = !$"../FPSCounter".visible
+	#if event.is_action_pressed("toggle_hud"):
+	#	$"../FPSCounter".visible = !$"../FPSCounter".visible
 
 	# Toggle mouse capture
-	if event.is_action_pressed("toggle_mouse_capture"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	#if event.is_action_pressed("toggle_mouse_capture"):
+#		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+#			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		#else:
+		#	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
 	# Speed modifier

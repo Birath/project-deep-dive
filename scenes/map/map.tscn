@@ -10,7 +10,6 @@
 
 [node name="chunk0" type="Spatial" parent="."]
 script = ExtResource( 1 )
-lod_scale = 2.0
 _terrain_data = ExtResource( 2 )
 chunk_size = 32
 shader_type = "Classic4Lite"
