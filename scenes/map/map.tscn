@@ -1,12 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=1]
 [ext_resource path="res://assets/terrain/map_chunk0/data.hterrain" type="Resource" id=2]
 [ext_resource path="res://shaders/wireframe.shader" type="Shader" id=3]
+[ext_resource path="res://assets/terrain/sea/data.hterrain" type="Resource" id=4]
 [ext_resource path="res://assets/terrain/map_chunk1/data.hterrain" type="Resource" id=5]
 [ext_resource path="res://assets/terrain/map_chunk2/data.hterrain" type="Resource" id=6]
 [ext_resource path="res://assets/terrain/map_chunk3/data.hterrain" type="Resource" id=7]
 [ext_resource path="res://scenes/map/map.gd" type="Script" id=8]
+[ext_resource path="res://shaders/sea.shader" type="Shader" id=9]
 
 [node name="map_root" type="Spatial"]
 script = ExtResource( 8 )
@@ -117,6 +119,27 @@ shader_params/time2 = null
 shader_params/time3 = null
 shader_params/time4 = null
 shader_params/time5 = null
+ground/albedo_bump_0 = null
+ground/normal_roughness_0 = null
+ground/albedo_bump_1 = null
+ground/normal_roughness_1 = null
+ground/albedo_bump_2 = null
+ground/normal_roughness_2 = null
+ground/albedo_bump_3 = null
+ground/normal_roughness_3 = null
+
+[node name="HTerrain" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 0, 0, 0, 0, 1, -2048, 256, -2048 )
+script = ExtResource( 1 )
+ambient_wind = 1.0
+lod_scale = 2.0
+map_scale = Vector3( 8, 1, 8 )
+_terrain_data = ExtResource( 4 )
+chunk_size = 32
+shader_type = "Custom"
+custom_shader = ExtResource( 9 )
+shader_params/size = 0.01
+shader_params/lineFunc = 3.0
 ground/albedo_bump_0 = null
 ground/normal_roughness_0 = null
 ground/albedo_bump_1 = null
