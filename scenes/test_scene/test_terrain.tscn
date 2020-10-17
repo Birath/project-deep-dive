@@ -1,20 +1,26 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=1]
 [ext_resource path="res://scenes/test_scene/freelook.gd" type="Script" id=2]
-[ext_resource path="res://assets/terrain/data.hterrain" type="Resource" id=3]
+[ext_resource path="res://assets/terrain/test_map/data.hterrain" type="Resource" id=3]
+[ext_resource path="res://shaders/wireframe.shader" type="Shader" id=4]
 
 [node name="Spatial" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -57.2013, 2.44972, -115.533 )
 
 [node name="HTerrain" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.18877, -10.5801, 12.9187 )
 script = ExtResource( 1 )
 _terrain_data = ExtResource( 3 )
 chunk_size = 32
-shader_type = "Classic4Lite"
-custom_shader = null
-shader_params/u_ground_uv_scale = 20
-shader_params/u_depth_blending = true
-shader_params/u_triplanar = false
+shader_type = "Custom"
+custom_shader = ExtResource( 4 )
+shader_params/maxDist = 40.0
+shader_params/size = 0.5
+shader_params/fadeSpeed = 2.0
+shader_params/fade = null
+shader_params/fadeFunc = 4.0
+shader_params/lineFunc = 4.0
 ground/albedo_bump_0 = null
 ground/normal_roughness_0 = null
 ground/albedo_bump_1 = null
@@ -25,5 +31,6 @@ ground/albedo_bump_3 = null
 ground/normal_roughness_3 = null
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 371.959, 107.718, -15.4255 )
+transform = Transform( -1, 2.30405e-07, -2.30405e-07, 0, 0.707107, 0.707107, 3.25841e-07, 0.707107, -0.707107, 331.722, 94.5454, -7.85665 )
+fov = 70.3125
 script = ExtResource( 2 )

@@ -1,0 +1,101 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=1]
+[ext_resource path="res://assets/terrain/map_chunk0/data.hterrain" type="Resource" id=2]
+[ext_resource path="res://shaders/wireframe.shader" type="Shader" id=3]
+[ext_resource path="res://scenes/map/goal_manager.gd" type="Script" id=4]
+[ext_resource path="res://assets/terrain/map_chunk1/data.hterrain" type="Resource" id=5]
+[ext_resource path="res://assets/terrain/map_chunk2/data.hterrain" type="Resource" id=6]
+[ext_resource path="res://assets/terrain/map_chunk3/data.hterrain" type="Resource" id=7]
+
+[node name="root" type="Spatial"]
+
+[node name="chunk0" type="Spatial" parent="."]
+script = ExtResource( 1 )
+_terrain_data = ExtResource( 2 )
+chunk_size = 32
+shader_type = "Custom"
+custom_shader = ExtResource( 3 )
+shader_params/maxDist = 50.0
+shader_params/size = 0.5
+shader_params/fadeSpeed = 2.0
+shader_params/fade = 0.0
+shader_params/fadeFunc = 4.0
+shader_params/lineFunc = 4.0
+ground/albedo_bump_0 = null
+ground/normal_roughness_0 = null
+ground/albedo_bump_1 = null
+ground/normal_roughness_1 = null
+ground/albedo_bump_2 = null
+ground/normal_roughness_2 = null
+ground/albedo_bump_3 = null
+ground/normal_roughness_3 = null
+
+[node name="chunk1" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -512, 0, 0 )
+script = ExtResource( 1 )
+_terrain_data = ExtResource( 5 )
+chunk_size = 32
+shader_type = "Custom"
+custom_shader = ExtResource( 3 )
+shader_params/maxDist = 50.0
+shader_params/size = 0.5
+shader_params/fadeSpeed = 2.0
+shader_params/fade = 0.0
+shader_params/fadeFunc = 4.0
+shader_params/lineFunc = 4.0
+ground/albedo_bump_0 = null
+ground/normal_roughness_0 = null
+ground/albedo_bump_1 = null
+ground/normal_roughness_1 = null
+ground/albedo_bump_2 = null
+ground/normal_roughness_2 = null
+ground/albedo_bump_3 = null
+ground/normal_roughness_3 = null
+
+[node name="chunk2" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -512 )
+script = ExtResource( 1 )
+_terrain_data = ExtResource( 6 )
+chunk_size = 32
+shader_type = "Custom"
+custom_shader = ExtResource( 3 )
+shader_params/maxDist = 50.0
+shader_params/size = 0.5
+shader_params/fadeSpeed = 2.0
+shader_params/fade = 0.0
+shader_params/fadeFunc = 4.0
+shader_params/lineFunc = 4.0
+ground/albedo_bump_0 = null
+ground/normal_roughness_0 = null
+ground/albedo_bump_1 = null
+ground/normal_roughness_1 = null
+ground/albedo_bump_2 = null
+ground/normal_roughness_2 = null
+ground/albedo_bump_3 = null
+ground/normal_roughness_3 = null
+
+[node name="chunk3" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -512, 0, -512 )
+script = ExtResource( 1 )
+_terrain_data = ExtResource( 7 )
+chunk_size = 32
+shader_type = "Custom"
+custom_shader = ExtResource( 3 )
+shader_params/maxDist = 50.0
+shader_params/size = 0.5
+shader_params/fadeSpeed = 2.0
+shader_params/fade = 0.0
+shader_params/fadeFunc = 4.0
+shader_params/lineFunc = 4.0
+ground/albedo_bump_0 = null
+ground/normal_roughness_0 = null
+ground/albedo_bump_1 = null
+ground/normal_roughness_1 = null
+ground/albedo_bump_2 = null
+ground/normal_roughness_2 = null
+ground/albedo_bump_3 = null
+ground/normal_roughness_3 = null
+
+[node name="goal_manager" type="Spatial" parent="."]
+script = ExtResource( 4 )
