@@ -3,6 +3,7 @@
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=1]
 [ext_resource path="res://scenes/test_scene/freelook.gd" type="Script" id=2]
 [ext_resource path="res://assets/terrain/test_map/data.hterrain" type="Resource" id=3]
+[ext_resource path="res://shaders/wireframe.shader" type="Shader" id=4]
 
 [node name="Spatial" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -57.2013, 2.44972, -115.533 )
@@ -14,10 +15,10 @@ _terrain_data = ExtResource( 3 )
 chunk_size = 32
 shader_type = "Custom"
 custom_shader = ExtResource( 4 )
-shader_params/maxDist = 50.0
-shader_params/size = 1.0
-shader_params/fadeSpeed = 1.0
-shader_params/fade = 0.0
+shader_params/maxDist = 40.0
+shader_params/size = 0.5
+shader_params/fadeSpeed = 2.0
+shader_params/fade = null
 shader_params/fadeFunc = 4.0
 shader_params/lineFunc = 4.0
 ground/albedo_bump_0 = null
