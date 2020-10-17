@@ -1,11 +1,11 @@
 extends RigidBody
 
 
-export var FORWARD_SPEED = 10
-export var TURNING_SPEED = 1
-export var VERTICAL_SPEED = 1
+export var FORWARD_SPEED = 8
+export var TURNING_SPEED = 2
+export var VERTICAL_SPEED = 2
 
-var target_position := Vector3()
+export var target_position := Vector3()
 
 var TARGET_GOAL_DISTANCE = 30
 
