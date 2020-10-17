@@ -31,16 +31,24 @@ func _process(delta):
 		color = disabled
 	if state_left == 2:
 		$indicator_left2.get_surface_material(1).set_shader_param("color", color)
+		$light_left.light_color = color
 	if state_right == 2:
 		$indicator_right2.get_surface_material(1).set_shader_param("color", color)
+		$light_right.light_color = color
 
 func set_left(color):
 	state_left = color
-	$indicator_left2.get_surface_material(1).set_shader_param("color", get_color(color))
+	var c = get_color(color)
+	
+	$indicator_left2.get_surface_material(1).set_shader_param("color", c)
+	$light_left.light_color = c
+	
 	
 func set_right(color):
 	state_right = color	
-	$indicator_right2.get_surface_material(1).set_shader_param("color", get_color(color))
+	var c = get_color(color)
+	$indicator_right2.get_surface_material(1).set_shader_param("color", c)
+	$light_right.light_color = c
 
 func get_color(index):
 	match(index):
