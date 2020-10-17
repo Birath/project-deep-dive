@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=1]
 [ext_resource path="res://assets/terrain/map_chunk0/data.hterrain" type="Resource" id=2]
+[ext_resource path="res://shaders/wireframe.shader" type="Shader" id=3]
 [ext_resource path="res://assets/terrain/map_chunk1/data.hterrain" type="Resource" id=5]
 [ext_resource path="res://assets/terrain/map_chunk2/data.hterrain" type="Resource" id=6]
 [ext_resource path="res://assets/terrain/map_chunk3/data.hterrain" type="Resource" id=7]
@@ -12,11 +13,14 @@
 script = ExtResource( 1 )
 _terrain_data = ExtResource( 2 )
 chunk_size = 32
-shader_type = "Classic4Lite"
-custom_shader = null
-shader_params/u_ground_uv_scale = 20
-shader_params/u_depth_blending = true
-shader_params/u_triplanar = false
+shader_type = "Custom"
+custom_shader = ExtResource( 3 )
+shader_params/maxDist = 50.0
+shader_params/size = 0.5
+shader_params/fadeSpeed = 2.0
+shader_params/fade = 0.0
+shader_params/fadeFunc = 4.0
+shader_params/lineFunc = 4.0
 ground/albedo_bump_0 = null
 ground/normal_roughness_0 = null
 ground/albedo_bump_1 = null
@@ -31,11 +35,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -512, 0, 0 )
 script = ExtResource( 1 )
 _terrain_data = ExtResource( 5 )
 chunk_size = 32
-shader_type = "Classic4Lite"
-custom_shader = null
-shader_params/u_ground_uv_scale = 20
-shader_params/u_depth_blending = true
-shader_params/u_triplanar = false
+shader_type = "Custom"
+custom_shader = ExtResource( 3 )
+shader_params/maxDist = 50.0
+shader_params/size = 0.5
+shader_params/fadeSpeed = 2.0
+shader_params/fade = 0.0
+shader_params/fadeFunc = 4.0
+shader_params/lineFunc = 4.0
 ground/albedo_bump_0 = null
 ground/normal_roughness_0 = null
 ground/albedo_bump_1 = null
@@ -50,11 +57,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -512 )
 script = ExtResource( 1 )
 _terrain_data = ExtResource( 6 )
 chunk_size = 32
-shader_type = "Classic4Lite"
-custom_shader = null
-shader_params/u_ground_uv_scale = 20
-shader_params/u_depth_blending = true
-shader_params/u_triplanar = false
+shader_type = "Custom"
+custom_shader = ExtResource( 3 )
+shader_params/maxDist = 50.0
+shader_params/size = 0.5
+shader_params/fadeSpeed = 2.0
+shader_params/fade = 0.0
+shader_params/fadeFunc = 4.0
+shader_params/lineFunc = 4.0
 ground/albedo_bump_0 = null
 ground/normal_roughness_0 = null
 ground/albedo_bump_1 = null
@@ -69,11 +79,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -512, 0, -512 )
 script = ExtResource( 1 )
 _terrain_data = ExtResource( 7 )
 chunk_size = 32
-shader_type = "Classic4Lite"
-custom_shader = null
-shader_params/u_ground_uv_scale = 20
-shader_params/u_depth_blending = true
-shader_params/u_triplanar = false
+shader_type = "Custom"
+custom_shader = ExtResource( 3 )
+shader_params/maxDist = 50.0
+shader_params/size = 0.5
+shader_params/fadeSpeed = 2.0
+shader_params/fade = 0.0
+shader_params/fadeFunc = 4.0
+shader_params/lineFunc = 4.0
 ground/albedo_bump_0 = null
 ground/normal_roughness_0 = null
 ground/albedo_bump_1 = null
