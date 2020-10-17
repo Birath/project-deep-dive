@@ -64,11 +64,14 @@ func get_vertical_vector():
 
 
 func randomize_target():
-	target_pos.x = rng.randf_range(-512, 512)
+	#target_pos.x = rng.randf_range(-512, 512)
+	target_pos.x = rng.randf_range(-100, 100)
 	target_pos.y = rng.randf_range(0, 100)
-	target_pos.z = rng.randf_range(-512, 512)
+	#target_pos.z = rng.randf_range(-512, 512)
+	target_pos.z = rng.randf_range(-100, 100)
 
 
 func _on_sonar_detection_area_entered(area):
 	if "sonar" in area.get_groups():
+		print("sub detected sonar")
 		target_pos = area.transform.origin
