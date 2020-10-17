@@ -8,7 +8,7 @@ onready var initial_rotation = PI/2
 
 func _enter_tree():
 	# Capture the mouse (can be toggled by pressing F10)
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	pass
 
 func _input(event):
 	# Horizontal mouse look

@@ -4,7 +4,7 @@ const ScanNode = preload("res://scenes/map/scannable_node.tscn")
 
 signal complete
 
-export(int) var columns = 5
+export(int) var columns = 5 
 export(int) var rows = 5
 export(int) var distance_between_nodes = 20
 
@@ -15,6 +15,9 @@ var is_complete := false setget , get_is_complete
 func get_is_complete() -> bool:
 	return is_complete 
 
+func get_size() -> Vector2:
+	return Vector2(columns * distance_between_nodes, rows * distance_between_nodes)
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:	
 	for col in range(columns):
