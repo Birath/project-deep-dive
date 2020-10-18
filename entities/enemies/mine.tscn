@@ -47,24 +47,24 @@ shader = SubResource( 2 )
 
 [node name="mine" instance=ExtResource( 2 )]
 
-[node name="ChainY2" parent="." index="0"]
-material/0 = ExtResource( 1 )
+[node name="Spikes2" parent="." index="0"]
+transform = Transform( 100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 0.0150194, 0.0395632, -0.0115004 )
+material/0 = SubResource( 3 )
 
 [node name="Core2" parent="." index="1"]
 material/0 = ExtResource( 3 )
 
-[node name="Spikes2" parent="." index="2"]
-transform = Transform( 100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 0.0150194, 0.0395632, -0.0115004 )
-material/0 = SubResource( 3 )
-
-[node name="ChainX2" parent="." index="3"]
+[node name="ChainX2" parent="." index="2"]
 material/0 = ExtResource( 1 )
 
-[node name="Area" type="Area" parent="." index="4" groups=[
+[node name="ChainY2" parent="." index="3"]
+material/0 = ExtResource( 1 )
+
+[node name="mine_area" type="Area" parent="." index="4" groups=[
 "enemy",
 ]]
 collision_layer = 512
-collision_mask = 512
+collision_mask = 513
 
-[node name="CollisionShape" type="CollisionShape" parent="Area" index="0"]
+[node name="CollisionShape" type="CollisionShape" parent="mine_area" index="0"]
 shape = SubResource( 4 )
