@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://shaders/object_wireframe.tres" type="Material" id=1]
+[ext_resource path="res://assets/enemies/depth_charge.fbx" type="PackedScene" id=2]
+
+[node name="depth_charge" instance=ExtResource( 2 )]
+
+[node name="DepthCharge2" parent="." index="0"]
+material/0 = ExtResource( 1 )
