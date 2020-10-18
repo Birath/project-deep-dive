@@ -33,6 +33,11 @@ func _process(delta):
 	var color
 	var map = get_node("sonar_map2");
 	map.get_surface_material(1).set_shader_param("Time", OS.get_ticks_msec());
+	var player = get_node("..");
+	var coord = Vector2(player.global_transform.origin.x, player.global_transform.origin.z)
+	var rot = player.rotation.y
+	map.get_surface_material(1).set_shader_param("Pos", coord);
+	map.get_surface_material(1).set_shader_param("angle", -rot);
 	
 	if OS.get_ticks_msec() / 100 % 10 < 6:
 		color = yellow
@@ -52,9 +57,10 @@ func _process(delta):
 	if game_manager != null:
 		set_arrow(game_manager.get_current_goal())
 	
-func send_sonar():
+func send_sonar(pos):
 	var map = get_node("sonar_map2");
 	map.get_surface_material(1).set_shader_param("time0", OS.get_ticks_msec());
+	map.get_surface_material(1).set_shader_param("pos0", pos);
 
 
 func set_left(color):

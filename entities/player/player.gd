@@ -67,7 +67,8 @@ func get_sonar_input(delta):
 
 		map._send_sonar(global_transform.origin)
 		var interior = get_node("submarine_interior")
-		interior.send_sonar()
+		var coord = Vector2(global_transform.origin.x, global_transform.origin.z);
+		interior.send_sonar(coord);
 		
 		object_material.set_shader_param("pos" + str(sonar_index), global_transform.origin)
 		object_material.set_shader_param("time" + str(sonar_index), OS.get_ticks_msec())

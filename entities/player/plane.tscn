@@ -37,6 +37,7 @@ anchor_bottom = 1.0
 custom_fonts/font = SubResource( 1 )
 text = "Nodes
 2/5"
+align = 2
 
 [node name="DisplayEM2" parent="." index="1"]
 material/1 = SubResource( 3 )
