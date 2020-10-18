@@ -109,6 +109,8 @@ func _on_Sonar_area_entered(area):
 	pass
 
 func damage(time):
+	if is_dying:
+		return
 	is_dying = true
 	time_till_death = time
 	$DangerLight.enabled = true
