@@ -88,7 +88,14 @@ margin_bottom = 40.0
 rect_rotation = 60.0
 color = Color( 0.356863, 0.0156863, 0.0156863, 1 )
 
-[node name="sonar_map2" parent="." index="3"]
+[node name="ColorRect" type="ColorRect" parent="map_viewport/Viewport/map" index="1"]
+margin_left = 123.0
+margin_top = 123.0
+margin_right = 133.0
+margin_bottom = 133.0
+color = Color( 0, 0.227451, 1, 1 )
+
+[node name="sonar_map2" parent="." index="4"]
 material/1 = SubResource( 3 )
 
 [node name="indicator_right2" parent="." index="4"]

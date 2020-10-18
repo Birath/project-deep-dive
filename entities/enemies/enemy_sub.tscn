@@ -25,7 +25,9 @@ Torpedo = ExtResource( 3 )
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.470446, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="sonar_detection" type="Area" parent="."]
+[node name="sonar_detection" type="Area" parent="." groups=[
+"enemy",
+]]
 collision_layer = 512
 collision_mask = 512
 

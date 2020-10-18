@@ -131,11 +131,12 @@ func draw_map_entities() -> void:
 		var map_x = 128 + relative_position.x / 100 * 128
 		var map_y = 128 + -relative_position.z / 100 * 128
 		entity.set_position(Vector2(map_x, map_y))
-		var distance = sonar_source_position.distance_to(Vector2(area.global_transform.origin.x, area.global_transform.origin.z))
-		var index = scanned_areas.find(area);
+		
 		if 2.5 < time_since_sonar && time_since_sonar < 8  && scanned_areas.find(area) != -1:
 			entity.visible = true
 		elif "scan_node" in area.get_groups() && area.is_scanned:
+			entity.visible = true
+		elif "torpedo" in area.get_groups():
 			entity.visible = true
 		elif time_since_sonar < 2.5 && time_since_sonar * ping_speed > sonar_source_position.distance_to(Vector2(area.global_transform.origin.x, area.global_transform.origin.z)):
 			entity.visible = draw_map

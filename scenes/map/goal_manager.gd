@@ -57,8 +57,7 @@ func calculate_goal_position(quadrant: int) -> Vector3:
 	var x := rand_generate.randf_range(x_range.x, x_range.y)
 	var z := rand_generate.randf_range(z_range.x, z_range.y)
 	print("Quadrant ", quadrant, ": ", x, ", ", z)
-	if quadrant == 0:
-		return Vector3(50, 0, 50)
+
 	return Vector3(x, 0, z)
 
 func fix_minimum_distance(quadrant: int, x_range: Vector2, z_range: Vector2) -> Array:
