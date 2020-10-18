@@ -89,8 +89,16 @@ func get_color(index):
 		3: return red
 		3: return disabled
 	return Color(0, 0, 0)
+	
+func set_screen(nodes, maxNodes):
+	var label = get_node("interior_display/ViewportContainer/Viewport/Label")
+	label.text = "Nodes\n" + str(nodes) + "/" + str(maxNodes)
 
 func set_arrow(position: Vector3) -> void:
+	if position == null:
+		$map_viewport/Viewport/map/arrow.visible = false
+		return
+			
 	var global = global_transform
 	var origin = global.origin
 	var basis = global.basis
@@ -98,6 +106,11 @@ func set_arrow(position: Vector3) -> void:
 	var d_origin = Vector2(origin.x, origin.z)
 	var towards = pos.direction_to(d_origin)
 	var distance = pos.distance_to(d_origin)
+	if distance < 100:
+		var scale = max(distance / 100, 0.75)
+		$map_viewport/Viewport/map/arrow/arrow1.rect_scale = Vector2(scale, scale)
+		$map_viewport/Viewport/map/arrow/arrow2.rect_scale = Vector2(scale, scale)
+		
 	if distance < 0: # TODO Maybe don't show when source is scanned
 		$map_viewport/Viewport/map/arrow.visible = false
 	else:

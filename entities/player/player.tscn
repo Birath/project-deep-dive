@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://shaders/object_wireframe.tres" type="Material" id=1]
 [ext_resource path="res://entities/player/player.gd" type="Script" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://assets/audio/underwater_ambiance.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/audio/alarm.wav" type="AudioStream" id=8]
 [ext_resource path="res://shaders/terrain_wireframe.tres" type="Material" id=9]
-[ext_resource path="res://assets/enemies/interior_display.fbx" type="PackedScene" id=11]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 9.0
@@ -43,8 +42,6 @@ script = ExtResource( 3 )
 
 [node name="submarine_interior" parent="." instance=ExtResource( 5 )]
 disabled = Color( 0.101961, 0.101961, 0.101961, 1 )
-
-[node name="interior_display" parent="submarine_interior" instance=ExtResource( 11 )]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00617123, -0.0105028, 4.35129 )

@@ -21,6 +21,8 @@ func _ready() -> void:
 	size_instance = ScanSource.instance()
 	create_goals()
 	current_goal = uncompleted_sources[randi() % uncompleted_sources.size()]
+	var screen = get_node("../Player/submarine_interior");
+	screen.set_screen(complete_sources, SCAN_SOURCES);
 
 func create_goals() -> void:
 	for quadrant in range(SCAN_SOURCES):
@@ -78,11 +80,16 @@ func fix_minimum_distance(quadrant: int, x_range: Vector2, z_range: Vector2) -> 
 
 func _on_source_complete(source) -> void:
 	uncompleted_sources.remove(uncompleted_sources.find(source))
-	if current_goal == source:
-		current_goal = uncompleted_sources[randi() % uncompleted_sources.size()]
 	complete_sources += 1
+	var screen = get_node("../Player/submarine_interior");
+	screen.set_screen(complete_sources, SCAN_SOURCES);
 	if complete_sources == SCAN_SOURCES:
 		get_tree().change_scene("res://menu/Victory.tscn")
+		current_goal = null
+	elif current_goal == source:
+		current_goal = uncompleted_sources[randi() % uncompleted_sources.size()]
 		
 func get_current_goal() -> Vector3:
+	if current_goal == null:
+		return Vector3.ZERO
 	return current_goal.global_transform.origin
