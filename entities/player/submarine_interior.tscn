@@ -76,13 +76,13 @@ margin_right = 168.0
 margin_bottom = 50.0
 rect_pivot_offset = Vector2( 0, 118 )
 
-[node name="ColorRect" type="ColorRect" parent="map_viewport/Viewport/map/arrow" index="0"]
+[node name="arrow1" type="ColorRect" parent="map_viewport/Viewport/map/arrow" index="0"]
 margin_right = 40.0
 margin_bottom = 10.0
 rect_rotation = 30.0
 color = Color( 0.356863, 0.0156863, 0.0156863, 1 )
 
-[node name="ColorRect2" type="ColorRect" parent="map_viewport/Viewport/map/arrow" index="1"]
+[node name="arrow2" type="ColorRect" parent="map_viewport/Viewport/map/arrow" index="1"]
 margin_right = 10.0
 margin_bottom = 40.0
 rect_rotation = 60.0
