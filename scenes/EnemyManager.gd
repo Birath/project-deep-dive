@@ -5,14 +5,17 @@ var mine = preload("res://entities/enemies/mine.tscn")
 var boat = preload("res://entities/enemies/ship.tscn")
 var isSpawned = 0
 var rng = RandomNumberGenerator.new()
-
+var player
+#var p = get_parent().get_node("Player")
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var node = get_node("../goal_manager").positions
 	rng.randomize()
+	var node = get_node("../goal_manager").positions
+	get_node("../goal_manager").connect("scan_complete", self, "_on_scan_complete")
+	player = get_node("../Player")
 	var length = node.size()
 	for n in range(length):
 		spawn_mine(n,5)
@@ -21,19 +24,41 @@ func _ready():
 
 	
 func _process(_delta):
-	var player_points = get_node("../goal_manager").complete_sources 
-	if player_points >= 1 && isSpawned == 0:
-		spawn_e()
-		isSpawned = 1
+	pass
+	# var player_points = get_node("../goal_manager").complete_sources #Scannable nodes från scannable source?
+	# if player_points >= 1 && isSpawned == 0:
+	# 	spawn_e()
+	# 	isSpawned = 1
 
-func spawn_e():
+func _on_scan_complete(scans_left: int, next_goal) -> void:
+	var towards_next_goal = player.global_transform.origin.direction_to(next_goal.global_transform.origin)
+	var distance = player.global_transform.origin.distance_to(next_goal.global_transform.origin)
+	if scans_left == 3:
+		var spawn_pos = player.global_transform.origin + towards_next_goal * distance * 0.5
+		spawn_pos.y += 10
+		spawn_uboat(spawn_pos)
+		spawn_pos = player.global_transform.origin + Vector3(rng.randf_range(50, 100), 5, rng.randf_range(50, 100))
+		spawn_uboat(spawn_pos)
+		
+	if scans_left == 2:
+		var spawn_pos = player.global_transform.origin + towards_next_goal * distance * 0.2
+		spawn_pos.y += 10
+		spawn_uboat(spawn_pos)
+		spawn_pos = player.global_transform.origin + towards_next_goal * distance * 0.9
+		spawn_uboat(spawn_pos)
+	if scans_left == 1:
+		var spawn_pos = player.global_transform.origin + Vector3(rng.randf_range(50, 100), 5, rng.randf_range(50, 100))
+		spawn_uboat(spawn_pos)
+		spawn_pos = player.global_transform.origin + Vector3(rng.randf_range(50, 100), 5, rng.randf_range(50, 100))
+		spawn_uboat(spawn_pos)
+		spawn_uboat(next_goal.global_transform.origin)
+		spawn_uboat(next_goal.global_transform.origin + Vector3(30, 0, 30))
+
+
+func spawn_uboat(pos: Vector3):
 	var s = enemy.instance()
-	var player = get_node("../Player")
-	var posx = player.global_transform.origin.x
-	var posy = player.global_transform.origin.y
-	var posz = player.global_transform.origin.z
-	s.translate(Vector3(posx+20, posy+10, posz))
 	add_child(s)
+	s.global_translate(pos)
 	
 	
 const grid_space = 20
