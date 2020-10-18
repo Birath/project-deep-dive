@@ -68,8 +68,8 @@ func randomize_target():
 
 func launch_torpedo():
 	var torpedo = Torpedo.instance()
-	get_parent().add_child(torpedo)
 	torpedo.transform = global_transform
+	get_parent().add_child(torpedo)
 	torpedo.target_position = target_position
 	get_node("torpedo_launch").play()
 	

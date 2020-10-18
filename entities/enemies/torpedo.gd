@@ -64,6 +64,4 @@ func _on_explosion_sound_finished():
 
 
 func _on_torpedo_area_body_entered(body):
-	if body.get_name() == "Player":
-		print("torpedo hit player")
-		explode()
+	explode()
