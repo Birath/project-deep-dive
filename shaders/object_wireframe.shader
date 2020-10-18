@@ -1,6 +1,8 @@
 shader_type spatial;
 render_mode specular_schlick_ggx, unshaded;
 
+uniform bool in_editor;
+
 uniform float width;
 uniform vec4 wire_color : hint_color;
 uniform vec3 ping;
@@ -153,7 +155,9 @@ void fragment() {
 		color +=  beep;
 	}
 
-// Output:0 
+if (in_editor)
+	ALBEDO = n_out38p0;
+else
 	ALBEDO = n_out38p0 * color;
 
 }

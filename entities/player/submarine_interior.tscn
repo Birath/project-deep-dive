@@ -7,7 +7,7 @@
 [ext_resource path="res://shaders/panel.shader" type="Shader" id=5]
 [ext_resource path="res://entities/player/plane.tscn" type="PackedScene" id=6]
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
 corner_radius_top_left = 128
 corner_radius_top_right = 128
@@ -15,10 +15,10 @@ corner_radius_bottom_right = 128
 corner_radius_bottom_left = 128
 corner_detail = 16
 
-[sub_resource type="ViewportTexture" id=1]
+[sub_resource type="ViewportTexture" id=2]
 viewport_path = NodePath("map_viewport/Viewport")
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
 shader = ExtResource( 5 )
 shader_param/maxDist = 100.0
@@ -29,8 +29,8 @@ shader_param/Pos = null
 shader_param/Time = 0.0
 shader_param/angle = null
 shader_param/pos0 = null
-shader_param/time0 = -100000.0
-shader_param/tex = SubResource( 1 )
+shader_param/time0 = -10000.0
+shader_param/tex = SubResource( 2 )
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 3 )
@@ -67,7 +67,7 @@ render_target_update_mode = 3
 [node name="map" type="Panel" parent="map_viewport/Viewport" index="0"]
 margin_right = 256.0
 margin_bottom = 256.0
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 1 )
 
 [node name="arrow" type="Control" parent="map_viewport/Viewport/map" index="0"]
 margin_left = 128.0
@@ -89,7 +89,7 @@ rect_rotation = 60.0
 color = Color( 0.356863, 0.0156863, 0.0156863, 1 )
 
 [node name="sonar_map2" parent="." index="3"]
-material/1 = SubResource( 2 )
+material/1 = SubResource( 3 )
 
 [node name="indicator_right2" parent="." index="4"]
 transform = Transform( 10.7813, 0, 0, 0, 5.78361, 9.09865, 0, -9.09865, 5.78361, 0.496834, -0.507118, -1.85907 )
