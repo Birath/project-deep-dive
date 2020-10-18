@@ -25,6 +25,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var color
+	var map = get_node("sonar_map2");
+	map.get_surface_material(1).set_shader_param("Time", OS.get_ticks_msec());
 	
 	if OS.get_ticks_msec() / 100 % 10 < 6:
 		color = yellow
@@ -38,6 +40,10 @@ func _process(delta):
 		$light_right.light_color = color
 	game_manager = get_tree().get_root().get_node("/root/World/goal_manager")
 	set_arrow(game_manager.get_current_goal())
+	
+func send_sonar():
+	var map = get_node("sonar_map2");
+	map.get_surface_material(1).set_shader_param("time0", OS.get_ticks_msec());
 
 func set_left(color):
 	state_left = color
