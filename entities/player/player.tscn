@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://shaders/object_wireframe.tres" type="Material" id=1]
 [ext_resource path="res://entities/player/player.gd" type="Script" id=2]
@@ -16,6 +16,9 @@ height = 9.0
 
 [sub_resource type="SphereShape" id=2]
 radius = 50.0
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 1 )
 
 [node name="Player" type="RigidBody"]
 gravity_scale = 0.0
@@ -68,6 +71,17 @@ autoplay = true
 [node name="Alarm" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 volume_db = 10.0
+
+[node name="black_overlay" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 254.0
+margin_bottom = 158.0
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="depth_charge" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.64723, 4.34161, -6.91856 )
