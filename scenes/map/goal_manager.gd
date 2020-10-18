@@ -86,7 +86,7 @@ func _on_source_complete(source) -> void:
 	var screen = get_node("../Player/submarine_interior");
 	screen.set_screen(complete_sources, SCAN_SOURCES);
 	if complete_sources == SCAN_SOURCES:
-		print("You won!!!!!!")
+		get_tree().change_scene("res://menu/Victory.tscn")
 		
 func get_current_goal() -> Vector3:
 	return current_goal.global_transform.origin

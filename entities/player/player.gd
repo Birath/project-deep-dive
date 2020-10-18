@@ -109,6 +109,8 @@ func _on_Sonar_area_entered(area):
 	pass
 
 func damage(time):
+	if is_dying:
+		return
 	is_dying = true
 	time_till_death = time
 	$DangerLight.enabled = true
@@ -117,4 +119,8 @@ func damage(time):
 func _on_hit_area_area_entered(area):
 	print("Player hit by:", area.get_name())
 	if area.get_name() == "depth_charge_area":
+		damage(5)
+	if area.get_name() == "torpedo_area":
+		damage(5)
+	if area.get_name() == "mine_area":
 		damage(5)
