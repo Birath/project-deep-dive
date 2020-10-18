@@ -82,7 +82,7 @@ func _on_source_complete(source) -> void:
 		current_goal = uncompleted_sources[randi() % uncompleted_sources.size()]
 	complete_sources += 1
 	if complete_sources == SCAN_SOURCES:
-		print("You won!!!!!!")
+		get_tree().change_scene("res://menu/Victory.tscn")
 		
 func get_current_goal() -> Vector3:
 	return current_goal.global_transform.origin
