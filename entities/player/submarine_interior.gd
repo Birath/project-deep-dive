@@ -89,6 +89,10 @@ func get_color(index):
 		3: return red
 		3: return disabled
 	return Color(0, 0, 0)
+	
+func set_screen(nodes, maxNodes):
+	var label = get_node("interior_display/ViewportContainer/Viewport/Label")
+	label.text = "Nodes\n" + str(nodes) + "/" + str(maxNodes)
 
 func set_arrow(position: Vector3) -> void:
 	var global = global_transform

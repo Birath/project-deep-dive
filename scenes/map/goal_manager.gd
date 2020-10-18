@@ -21,6 +21,8 @@ func _ready() -> void:
 	size_instance = ScanSource.instance()
 	create_goals()
 	current_goal = uncompleted_sources[randi() % uncompleted_sources.size()]
+	var screen = get_node("../Player/submarine_interior");
+	screen.set_screen(complete_sources, SCAN_SOURCES);
 
 func create_goals() -> void:
 	for quadrant in range(SCAN_SOURCES):
@@ -81,6 +83,8 @@ func _on_source_complete(source) -> void:
 	if current_goal == source:
 		current_goal = uncompleted_sources[randi() % uncompleted_sources.size()]
 	complete_sources += 1
+	var screen = get_node("../Player/submarine_interior");
+	screen.set_screen(complete_sources, SCAN_SOURCES);
 	if complete_sources == SCAN_SOURCES:
 		print("You won!!!!!!")
 		
