@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://shaders/object_wireframe.tres" type="Material" id=1]
+[ext_resource path="res://assets/enemies/attack_boat.fbx" type="PackedScene" id=2]
+
+[node name="attack_boat" instance=ExtResource( 2 )]
+
+[node name="AttackBoat2" parent="." index="0"]
+transform = Transform( 99.9997, 0.0532426, -0.236104, 0.236296, -0.362999, 99.9991, 0.0523835, -99.9993, -0.363124, 0, 0, 0 )
+material/0 = ExtResource( 1 )

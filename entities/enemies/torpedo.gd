@@ -1,8 +1,8 @@
 extends RigidBody
 
 
-export var FORWARD_SPEED = 10
-export var TURNING_SPEED = 5
+export var FORWARD_SPEED = 8
+export var TURNING_SPEED = 2
 export var VERTICAL_SPEED = 3
 
 export var target_position := Vector3()
@@ -26,7 +26,7 @@ func _process(delta):
 
 func _physics_process(delta):
 		# Forward force
-		add_force(get_forward_vector() * FORWARD_SPEED, get_forward_vector() * - 2)
+		add_force(get_forward_vector() * FORWARD_SPEED, get_forward_vector() * - 1)
 
 		# Horizontal directional force
 		add_force(get_horizontal_vector() * TURNING_SPEED, get_forward_vector() * - 1)
@@ -49,7 +49,6 @@ func get_vertical_vector():
 	var vertical_vector = Vector3(0, target_position.y - global_transform.origin.y, 0)
 	if abs(vertical_vector.y) < 0.2:
 		return Vector3.ZERO
-	print(vertical_vector.y)
 	return vertical_vector.normalized()
 	
 func explode():
@@ -65,7 +64,6 @@ func _on_explosion_sound_finished():
 
 
 func _on_torpedo_area_body_entered(body):
-	print("torpedo hit something")
 	if body.get_name() == "Player":
-		print("hit player")
+		print("torpedo hit player")
 		explode()

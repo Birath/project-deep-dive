@@ -11,6 +11,8 @@ export(float) var sonar_time = 0.5
 export(float) var sonar_cooldown = 5.0
 var current_sonar = 0.0
 var current_sonar_cooldown = 0.0
+var is_dying = false
+var time_till_death = INF
 
 export(ShaderMaterial) var object_material
 
@@ -24,13 +26,7 @@ func _process(delta):
 func _physics_process(delta):
 	get_movement_input(delta)
 	get_sonar_input(delta)
-	if Input.is_action_just_pressed("emergency"):
-		var en = $DangerLight.enabled
-		$DangerLight.enabled = !en
-		if !en:
-			$Alarm.play()
-		else:
-			$Alarm.stop()
+	process_death(delta)
 	
 
 func get_movement_input(delta):
@@ -86,6 +82,30 @@ func get_sonar_input(delta):
 	if (current_sonar_cooldown <= 0.0):
 		$submarine_interior.set_right(0)
 
+func process_death(delta):
+	if Input.is_action_just_pressed("emergency"):
+		damage(7.5)
+	
+	if !is_dying:
+		return
+	if time_till_death > 0.0:
+		time_till_death -= delta
+		$Alarm.volume_db = clamp(time_till_death * 2.5 - 10, -50, 10)
+		$black_overlay.modulate = Color(1.0, 1.0, 1.0, clamp(1.0 - time_till_death / 5.0, 0.0, 1.0))
+	else:
+		print("DEAD")
+		$Alarm.stop()
+		$Alarm.volume_db = 10
+		$DangerLight.enabled = false
+		$black_overlay.modulate = Color(1.0, 1.0, 1.0, 1.0)
+		
+		get_tree().change_scene("res://menu/Dead.tscn")
 
 func _on_Sonar_area_entered(area):
-	print("sonar detected shit")
+	pass
+
+func damage(time):
+	is_dying = true
+	time_till_death = time
+	$DangerLight.enabled = true
+	$Alarm.play()
