@@ -64,6 +64,7 @@ func get_sonar_input(delta):
 		current_sonar = sonar_time
 		current_sonar_cooldown = sonar_cooldown
 		var map = get_node("../root")
+
 		map._send_sonar(global_transform.origin)
 		var interior = get_node("submarine_interior")
 		interior.send_sonar()
@@ -72,14 +73,17 @@ func get_sonar_input(delta):
 		object_material.set_shader_param("time" + str(sonar_index), OS.get_ticks_msec())
 		sonar_index = (sonar_index + 1) % SONAR_INDEX_MAX
 		
+		$submarine_interior.set_draw_map(true)
 		$submarine_interior.set_right(1)
 	elif (current_sonar <= 0.0 && !$Sonar/Active.disabled):
 		$Sonar/Active.disabled = true
 		$submarine_interior.set_right(2)
+		
 	else:
 		current_sonar -= delta
 	current_sonar_cooldown -= delta
 	if (current_sonar_cooldown <= 0.0):
+		$submarine_interior.set_draw_map(false)
 		$submarine_interior.set_right(0)
 
 func process_death(delta):
@@ -109,7 +113,6 @@ func damage(time):
 	time_till_death = time
 	$DangerLight.enabled = true
 	$Alarm.play()
-
 
 func _on_hit_area_area_entered(area):
 	print("Player hit by:", area.get_name())
