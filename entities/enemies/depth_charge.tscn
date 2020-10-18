@@ -31,10 +31,10 @@ stream = ExtResource( 3 )
 unit_size = 40.0
 max_db = 2.0
 
-[node name="collision_area" type="Area" parent="."]
+[node name="depth_charge_area" type="Area" parent="."]
 
-[node name="collision_shape" type="CollisionShape" parent="collision_area"]
+[node name="collision_shape" type="CollisionShape" parent="depth_charge_area"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0500525, 0 )
 shape = SubResource( 2 )
 [connection signal="finished" from="explosion_sound" to="." method="_on_explosion_sound_finished"]
-[connection signal="body_entered" from="collision_area" to="." method="_on_collision_area_body_entered"]
+[connection signal="body_entered" from="depth_charge_area" to="." method="_on_collision_area_body_entered"]

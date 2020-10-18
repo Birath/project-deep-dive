@@ -109,3 +109,9 @@ func damage(time):
 	time_till_death = time
 	$DangerLight.enabled = true
 	$Alarm.play()
+
+
+func _on_hit_area_area_entered(area):
+	print("Player hit by:", area.get_name())
+	if area.get_name() == "depth_charge_area":
+		damage(5)
