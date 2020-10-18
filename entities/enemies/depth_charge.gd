@@ -32,9 +32,8 @@ func explode():
 
 
 func _on_collision_area_body_entered(body):
-	print("depth charge hit something")
 	if body.get_name() == "Player":
-		print("hit player")
+		print("depth charge hit player")
 		#TODO remove?
 	
 	explode()

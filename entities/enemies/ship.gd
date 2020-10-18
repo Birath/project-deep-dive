@@ -63,6 +63,7 @@ func drop_depth_charge():
 	var depth_charge = Depth_charge.instance()
 	owner.add_child(depth_charge)
 	depth_charge.transform = global_transform
+	#depth_charge.global_transform.origin.y -= 10
 	get_node("depth_charge_drop").play()
 
 
