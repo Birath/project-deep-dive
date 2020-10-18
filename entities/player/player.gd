@@ -14,13 +14,17 @@ var current_sonar_cooldown = 0.0
 var is_dying = false
 var time_till_death = INF
 
-export(ShaderMaterial) var object_material
+#export(ShaderMaterial) var object_material
+export(Array, ShaderMaterial) var object_materials
 
 func _ready():
 	$Sonar/Active.disabled = true
+	for mat in object_materials:
+		mat.set_shader_param("in_editor", false)
 
 func _process(delta):
-	object_material.set_shader_param("Time", OS.get_ticks_msec())
+	for mat in object_materials:
+		mat.set_shader_param("Time", OS.get_ticks_msec())
 	
 
 func _physics_process(delta):
@@ -69,8 +73,9 @@ func get_sonar_input(delta):
 		var interior = get_node("submarine_interior")
 		interior.send_sonar()
 		
-		object_material.set_shader_param("pos" + str(sonar_index), global_transform.origin)
-		object_material.set_shader_param("time" + str(sonar_index), OS.get_ticks_msec())
+		for mat in object_materials:
+			mat.set_shader_param("pos" + str(sonar_index), global_transform.origin)
+			mat.set_shader_param("time" + str(sonar_index), OS.get_ticks_msec())
 		sonar_index = (sonar_index + 1) % SONAR_INDEX_MAX
 		
 		$submarine_interior.set_draw_map(true)
