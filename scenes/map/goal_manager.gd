@@ -1,10 +1,12 @@
 extends Spatial
 
-var ScanSource = preload("res://scenes/map/scannable_source.tscn")
+signal scan_complete
 
 export(int) var MAP_SIZE = 512
 export(int) var SCAN_SOURCES = 1
 export(int) var MINIMUM_DISTANCE = 200
+
+var ScanSource = preload("res://scenes/map/scannable_source.tscn")
 
 var rand_generate := RandomNumberGenerator.new()
 var complete_sources := 0
@@ -57,8 +59,7 @@ func calculate_goal_position(quadrant: int) -> Vector3:
 	var x := rand_generate.randf_range(x_range.x, x_range.y)
 	var z := rand_generate.randf_range(z_range.x, z_range.y)
 	print("Quadrant ", quadrant, ": ", x, ", ", z)
-	if quadrant == 0:
-		return Vector3(50, 0, 50)
+
 	return Vector3(x, 0, z)
 
 func fix_minimum_distance(quadrant: int, x_range: Vector2, z_range: Vector2) -> Array:
@@ -81,6 +82,8 @@ func fix_minimum_distance(quadrant: int, x_range: Vector2, z_range: Vector2) -> 
 func _on_source_complete(source) -> void:
 	uncompleted_sources.remove(uncompleted_sources.find(source))
 	complete_sources += 1
+
+	
 	var screen = get_node("../Player/submarine_interior");
 	screen.set_screen(complete_sources, SCAN_SOURCES);
 	if complete_sources == SCAN_SOURCES:
@@ -88,6 +91,7 @@ func _on_source_complete(source) -> void:
 		current_goal = null
 	elif current_goal == source:
 		current_goal = uncompleted_sources[randi() % uncompleted_sources.size()]
+		emit_signal("scan_complete", SCAN_SOURCES - complete_sources, current_goal)
 		
 func get_current_goal() -> Vector3:
 	if current_goal == null:
