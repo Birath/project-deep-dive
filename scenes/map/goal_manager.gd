@@ -90,4 +90,6 @@ func _on_source_complete(source) -> void:
 		current_goal = uncompleted_sources[randi() % uncompleted_sources.size()]
 		
 func get_current_goal() -> Vector3:
+	if current_goal == null:
+		return Vector3.ZERO
 	return current_goal.global_transform.origin
