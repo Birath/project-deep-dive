@@ -2,7 +2,7 @@ extends Spatial
 
 var enemy = preload("res://entities/enemies/enemy_sub.tscn")
 var mine = preload("res://entities/enemies/mine.tscn")
-var boat = preload("res://assets/enemies/attack_boat.tscn") #Flytta attack_boat till entities?
+var boat = preload("res://entities/enemies/ship.tscn")
 var isSpawned = 0
 var rng = RandomNumberGenerator.new()
 
