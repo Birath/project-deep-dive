@@ -1,14 +1,26 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://entities/player/submarine_interior.gd" type="Script" id=1]
 [ext_resource path="res://assets/enemies/submarine_interior.fbx" type="PackedScene" id=2]
 [ext_resource path="res://shaders/indicator.tres" type="Shader" id=3]
+[ext_resource path="res://shaders/panel.tres" type="Material" id=4]
+[ext_resource path="res://shaders/panel.shader" type="Shader" id=5]
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 3 )
-shader_param/color = Color( 1, 1, 1, 1 )
+[sub_resource type="ViewportTexture" id=6]
+viewport_path = NodePath("map_viewport/Viewport")
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="ShaderMaterial" id=7]
+resource_local_to_scene = true
+shader = ExtResource( 5 )
+shader_param/maxDist = 100.0
+shader_param/pingSpeed = 0.02
+shader_param/size = 16.0
+shader_param/panelSize = 0.5
+shader_param/time0 = -100000.0
+shader_param/Time = 0.0
+shader_param/tex = SubResource( 6 )
+
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0, 0, 0, 1 )
 corner_radius_top_left = 128
 corner_radius_top_right = 128
@@ -16,16 +28,11 @@ corner_radius_bottom_right = 128
 corner_radius_bottom_left = 128
 corner_detail = 16
 
-[sub_resource type="ViewportTexture" id=5]
-viewport_path = NodePath("map_viewport/Viewport")
-
-[sub_resource type="SpatialMaterial" id=6]
-resource_local_to_scene = true
-flags_unshaded = true
-flags_albedo_tex_force_srgb = true
-albedo_texture = SubResource( 5 )
-
 [sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 3 )
+shader_param/color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 3 )
 shader_param/color = Color( 1, 1, 1, 1 )
 
@@ -36,15 +43,12 @@ blue = Color( 0.164706, 0.615686, 0.980392, 1 )
 green = Color( 0.227451, 0.698039, 0.0352941, 1 )
 red = Color( 0.913725, 0.0470588, 0.0470588, 1 )
 yellow = Color( 0.917647, 0.843137, 0.0156863, 1 )
-disabled = null
-state_left = null
-state_right = null
 
-[node name="indicator_left2" parent="." index="0"]
-transform = Transform( 10.7813, 0, 0, 0, 5.78361, 9.09865, 0, -9.09865, 5.78361, -0.499679, -0.504592, -1.86048 )
-material/1 = SubResource( 1 )
+[node name="sonar_map2" parent="." index="1"]
+material/1 = SubResource( 7 )
 
 [node name="map_viewport" type="ViewportContainer" parent="." index="2"]
+material = ExtResource( 4 )
 margin_left = -256.0
 margin_top = -256.0
 __meta__ = {
@@ -60,7 +64,7 @@ render_target_update_mode = 3
 [node name="map" type="Panel" parent="map_viewport/Viewport" index="0"]
 margin_right = 256.0
 margin_bottom = 256.0
-custom_styles/panel = SubResource( 7 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="arrow" type="Control" parent="map_viewport/Viewport/map" index="0"]
 margin_left = 128.0
@@ -81,12 +85,13 @@ margin_bottom = 40.0
 rect_rotation = 60.0
 color = Color( 0.356863, 0.0156863, 0.0156863, 1 )
 
-[node name="sonar_map2" parent="." index="3"]
-material/1 = SubResource( 6 )
-
-[node name="indicator_right2" parent="." index="4"]
+[node name="indicator_right2" parent="." index="3"]
 transform = Transform( 10.7813, 0, 0, 0, 5.78361, 9.09865, 0, -9.09865, 5.78361, 0.496834, -0.507118, -1.85907 )
 material/1 = SubResource( 4 )
+
+[node name="indicator_left2" parent="." index="4"]
+transform = Transform( 10.7813, 0, 0, 0, 5.78361, 9.09865, 0, -9.09865, 5.78361, -0.499679, -0.504592, -1.86048 )
+material/1 = SubResource( 5 )
 
 [node name="light_right" type="OmniLight" parent="." index="5"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0.500595, -0.372309, -1.79672 )

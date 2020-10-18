@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://shaders/panel.shader" type="Shader" id=1]
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("map_viewport/Viewport")
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/maxDist = 100.0
+shader_param/pingSpeed = 1.0
+shader_param/size = 16.0
+shader_param/panelSize = 1.0
+shader_param/time0 = null
+shader_param/Time = null
+shader_param/tex = SubResource( 1 )

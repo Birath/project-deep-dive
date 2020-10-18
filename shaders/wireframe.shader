@@ -50,10 +50,10 @@ void fragment() {
 		float line = abs(fract(sizeDist - 0.5) - 0.5) / fwidth(sizeDist);
 		
 		float t = pingSpeed*(Time-time[i]);
-		float beep = clamp(1.-abs(dist-t), 0., 1.);
-		beep += clamp((t-dist), 0., 0.3);
+		float ping = clamp(1.-abs(dist-t), 0., 1.);
+		float beep = clamp((t-dist), 0., 0.3);
 		beep *= clamp(1.-(t-maxDist)*pingSpeed, 0., 1.);
-		color +=  (1. - min(line, 1.))*beep;
+		color +=  (1. - min(line, 1.))*beep + ping;
 	}
 	ALBEDO = vec3(0., color, 0.);
 }

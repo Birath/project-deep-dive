@@ -14,6 +14,7 @@ float picker(float value, float choice) {
 
 void fragment() {	
 	vec2 coord = (CAMERA_MATRIX * vec4(VERTEX,1.) * WORLD_MATRIX).xz;
+	coord = UV;
 	coord *= size;
 	
 	// Compute anti-aliased world-space grid lines

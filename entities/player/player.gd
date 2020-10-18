@@ -64,9 +64,9 @@ func get_sonar_input(delta):
 		current_sonar = sonar_time
 		current_sonar_cooldown = sonar_cooldown
 		var map = get_node("../root")
-		var trans = global_transform.origin;
-		var pos = Vector3(trans.x, trans.y, trans.z)
-		map._send_sonar(pos)
+		map._send_sonar(global_transform.origin)
+		var interior = get_node("submarine_interior")
+		interior.send_sonar()
 		
 		object_material.set_shader_param("pos" + str(sonar_index), global_transform.origin)
 		object_material.set_shader_param("time" + str(sonar_index), OS.get_ticks_msec())

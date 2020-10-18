@@ -5,7 +5,6 @@ uniform sampler2D u_terrain_heightmap;
 uniform mat4 u_terrain_inverse_transform;
 
 uniform float size = 0.5;
-uniform float lineFunc : hint_range(1., 3, 1.);
 
 float picker(float value, float choice) {
 	return max(1. - abs(value - choice), 0);
@@ -29,6 +28,11 @@ void fragment() {
 	vec2 coord = (CAMERA_MATRIX * vec4(VERTEX,1.) * WORLD_MATRIX).xz;
 	coord *= size*0.2;
 	
+	vec2 offset = vec2(0);
+	offset.x = cos(TIME + coord.x + coord.y) * 0.1;
+	offset.y = sin(TIME + coord.x + coord.y) * 0.1;
+	coord += offset;
+	
 	// Compute anti-aliased world-space grid lines
 	vec2 grid = abs(fract(coord - 0.5) - 0.5) / fwidth(coord);
 	
@@ -37,16 +41,9 @@ void fragment() {
 	
 	float dist = length((CAMERA_MATRIX * vec4(VERTEX,1.) * WORLD_MATRIX).xz);
 	dist *= size;
-	float line1 = min(grid.x, grid.y);
-	float line2 = abs(fract(height - 0.5) - 0.5) / fwidth(height);
-	float line3 = min(line1, line2);
-	
-	float line = 0.;
-	line += line1 * picker(lineFunc, 1);
-	line += line2 * picker(lineFunc, 2);
-	line += line3 * picker(lineFunc, 3);
+	float line = min(grid.x, grid.y);
 	
 	float col =  (1. - min(line, 1.));
 	col *= smoothstep(1., 0., (1./200.)*(length(VERTEX)-800.));
-	ALBEDO = vec3(0., col, 0.);
+	ALBEDO = vec3(0., 0., col);
 }
