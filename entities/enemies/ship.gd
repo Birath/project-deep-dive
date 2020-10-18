@@ -1,10 +1,10 @@
 extends RigidBody
 
 
-export var FORWARD_SPEED = 5
+export var FORWARD_SPEED = 6
 export var TURNING_SPEED = 3
 
-var TARGET_GOAL_DISTANCE = 10
+var TARGET_GOAL_DISTANCE = 15
 
 var rng = RandomNumberGenerator.new()
 
@@ -22,8 +22,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var target_distance = Vector3(0, global_transform.origin.y, 0)
-	target_distance = target_position.distance_to(global_transform.origin)
+	target_position.y = global_transform.origin.y
+	var target_distance = target_position.distance_to(global_transform.origin)
 	if target_distance < TARGET_GOAL_DISTANCE:
 		if should_drop_charge:
 			drop_depth_charge()
@@ -60,8 +60,10 @@ func randomize_target():
 
 
 func drop_depth_charge():
+	print("dropping depth charge")
+	
 	var depth_charge = Depth_charge.instance()
-	owner.add_child(depth_charge)
+	get_parent().add_child(depth_charge)
 	depth_charge.transform = global_transform
 	#depth_charge.global_transform.origin.y -= 10
 	get_node("depth_charge_drop").play()
