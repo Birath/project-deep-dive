@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/font/Submarine.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/font/AmbangResesaiLarge.tres" type="DynamicFont" id=1]
 [ext_resource path="res://menu/dead.gd" type="Script" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]

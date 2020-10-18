@@ -14,13 +14,17 @@ var current_sonar_cooldown = 0.0
 var is_dying = false
 var time_till_death = INF
 
-export(ShaderMaterial) var object_material
+#export(ShaderMaterial) var object_material
+export(Array, ShaderMaterial) var object_materials
 
 func _ready():
 	$Sonar/Active.disabled = true
+	for mat in object_materials:
+		mat.set_shader_param("in_editor", false)
 
 func _process(delta):
-	object_material.set_shader_param("Time", OS.get_ticks_msec())
+	for mat in object_materials:
+		mat.set_shader_param("Time", OS.get_ticks_msec())
 	
 
 func _physics_process(delta):
@@ -67,10 +71,12 @@ func get_sonar_input(delta):
 
 		map._send_sonar(global_transform.origin)
 		var interior = get_node("submarine_interior")
-		interior.send_sonar()
+		var coord = Vector2(global_transform.origin.x, global_transform.origin.z);
+		interior.send_sonar(coord);
 		
-		object_material.set_shader_param("pos" + str(sonar_index), global_transform.origin)
-		object_material.set_shader_param("time" + str(sonar_index), OS.get_ticks_msec())
+		for mat in object_materials:
+			mat.set_shader_param("pos" + str(sonar_index), global_transform.origin)
+			mat.set_shader_param("time" + str(sonar_index), OS.get_ticks_msec())
 		sonar_index = (sonar_index + 1) % SONAR_INDEX_MAX
 		
 		$submarine_interior.set_draw_map(true)
@@ -109,6 +115,8 @@ func _on_Sonar_area_entered(area):
 	pass
 
 func damage(time):
+	if is_dying:
+		return
 	is_dying = true
 	time_till_death = time
 	$DangerLight.enabled = true
@@ -117,4 +125,8 @@ func damage(time):
 func _on_hit_area_area_entered(area):
 	print("Player hit by:", area.get_name())
 	if area.get_name() == "depth_charge_area":
+		damage(5)
+	if area.get_name() == "torpedo_area":
+		damage(5)
+	if area.get_name() == "mine_area":
 		damage(5)

@@ -6,7 +6,7 @@
 shader = ExtResource( 1 )
 shader_param/in_editor = true
 shader_param/width = 0.05
-shader_param/wire_color = Color( 1, 0, 0, 1 )
+shader_param/wire_color = Color( 0, 1, 0, 1 )
 shader_param/ping = Vector3( 0, 0, 0 )
 shader_param/max_distance = 100.0
 shader_param/Time = null

@@ -7,11 +7,19 @@ uniform float size = 16.;
 uniform float panelSize = 1.;
 uniform sampler2D tex;
 
-uniform float time0;
+uniform vec2 Pos;
 uniform float Time;
+uniform float angle;
+uniform vec2 pos0;
+uniform float time0;
 
-void fragment() {	
-	float dist = length(UV - vec2(0.5, 0.5));
+void fragment() {
+	//float dist = length((UV - vec2(0.5, 0.5)));
+	vec2 newCoord = UV - vec2(0.5, 0.5);
+	newCoord = vec2(newCoord.x * cos(angle) - newCoord.y * sin(angle),
+						newCoord.y * cos(angle) + newCoord.x * sin(angle));
+	vec2 temp = (newCoord) * (maxDist/panelSize);
+	float dist = length(pos0-temp-Pos) / (maxDist/panelSize);
 	float sizeDist = dist * size;
 	
 	float line = abs(fract(sizeDist - 0.5) - 0.5) / fwidth(sizeDist);

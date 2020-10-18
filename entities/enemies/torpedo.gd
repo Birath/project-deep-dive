@@ -11,6 +11,9 @@ var has_exploded = false
 
 var TARGET_GOAL_DISTANCE = 6
 
+var LIFE_SPAN = 12.0
+var current_time = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# get player position
@@ -19,6 +22,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	current_time += delta
+	if current_time > LIFE_SPAN:
+		explode()
+	
 	var target_distance = target_position.distance_to(global_transform.origin)
 	if target_distance < TARGET_GOAL_DISTANCE:
 		explode()
@@ -64,6 +71,4 @@ func _on_explosion_sound_finished():
 
 
 func _on_torpedo_area_body_entered(body):
-	if body.get_name() == "Player":
-		print("torpedo hit player")
-		explode()
+	explode()
