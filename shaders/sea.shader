@@ -5,6 +5,8 @@ uniform sampler2D u_terrain_heightmap;
 uniform mat4 u_terrain_inverse_transform;
 
 uniform float size = 0.5;
+uniform vec4 color : hint_color;
+
 
 float picker(float value, float choice) {
 	return max(1. - abs(value - choice), 0);
@@ -45,5 +47,7 @@ void fragment() {
 	
 	float col =  (1. - min(line, 1.));
 	col *= smoothstep(1., 0., (1./200.)*(length(VERTEX)-800.));
-	ALBEDO = vec3(0., 0., col);
+	//vec3(0., 0., col) * 
+	col *= 1.0 + cos(TIME / 2.0 + coord.x * 1.0 + coord.y * 0.3) * 0.5;
+	ALBEDO = color.rgb * col;
 }

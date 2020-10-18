@@ -129,17 +129,16 @@ ground/albedo_bump_3 = null
 ground/normal_roughness_3 = null
 
 [node name="HTerrain" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 0, 0, 0, 0, 1, -2048, 256, -2048 )
+transform = Transform( 1, 0, 0, 0, 0, 0, 0, 0, 1, -2048, 150, -2048 )
 script = ExtResource( 1 )
 ambient_wind = 1.0
-lod_scale = 2.0
 map_scale = Vector3( 8, 1, 8 )
 _terrain_data = ExtResource( 4 )
 chunk_size = 32
 shader_type = "Custom"
 custom_shader = ExtResource( 9 )
 shader_params/size = 0.01
-shader_params/lineFunc = 3.0
+shader_params/color = Color( 0, 0.168627, 0.223529, 1 )
 ground/albedo_bump_0 = null
 ground/normal_roughness_0 = null
 ground/albedo_bump_1 = null
