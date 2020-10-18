@@ -27,7 +27,7 @@ const float fadeSpeed = 0.02;
 
 // GlobalExpression:0
 float fade_distance(float dist, float max_dist, float slope) {
-	return clamp((max_dist - dist) / slope, 0, 1);
+	return 1.0;
 }
 
 void fragment() {
