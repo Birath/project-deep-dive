@@ -8,7 +8,8 @@
 [ext_resource path="res://entities/player/danger_light.gd" type="Script" id=6]
 [ext_resource path="res://assets/audio/underwater_ambiance.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/audio/alarm.wav" type="AudioStream" id=8]
-[ext_resource path="res://assets/enemies/interior_display.fbx" type="PackedScene" id=11]
+[ext_resource path="res://entities/enemies/depth_charge.tscn" type="PackedScene" id=9]
+[ext_resource path="res://entities/enemies/torpedo.tscn" type="PackedScene" id=10]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 9.0
@@ -18,13 +19,6 @@ radius = 50.0
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="CapsuleShape" id=4]
-radius = 1.1032
-height = 9.01761
-
-[sub_resource type="SphereShape" id=5]
-radius = 50.0
 
 [node name="Player" type="RigidBody"]
 gravity_scale = 0.0
@@ -42,8 +36,6 @@ script = ExtResource( 3 )
 
 [node name="submarine_interior" parent="." instance=ExtResource( 5 )]
 disabled = Color( 0.101961, 0.101961, 0.101961, 1 )
-
-[node name="interior_display" parent="submarine_interior" instance=ExtResource( 11 )]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00617123, -0.0105028, 4.35129 )
@@ -89,19 +81,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="hit_area" type="Area" parent="."]
+[node name="depth_charge" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.64723, 4.34161, -6.91856 )
 
-[node name="hit_shape" type="CollisionShape" parent="hit_area"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.33143 )
-shape = SubResource( 4 )
+[node name="depth_charge2" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.143, 8.95379, -8.39234 )
 
-[node name="MapSonar" type="Area" parent="."]
-collision_layer = 512
-collision_mask = 512
+[node name="depth_charge3" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6071, 7.4478, -10.4427 )
 
-[node name="CollisionShape" type="CollisionShape" parent="MapSonar"]
-shape = SubResource( 5 )
+[node name="depth_charge4" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2022, 6.50535, -9.40275 )
+
+[node name="torpedo" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9813, 4.48397, -10.572 )
+
+[node name="torpedo2" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.544, 4.91185, -11.7583 )
+
+[node name="torpedo3" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2735, 4.3246, -8.38236 )
 [connection signal="area_entered" from="Sonar" to="." method="_on_Sonar_area_entered"]
-[connection signal="area_entered" from="hit_area" to="." method="_on_hit_area_area_entered"]
-[connection signal="area_entered" from="MapSonar" to="submarine_interior" method="_on_MapSonar_area_entered"]
-[connection signal="area_exited" from="MapSonar" to="submarine_interior" method="_on_MapSonar_area_exited"]
