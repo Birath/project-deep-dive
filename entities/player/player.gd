@@ -120,3 +120,5 @@ func _on_hit_area_area_entered(area):
 		damage(5)
 	if area.get_name() == "torpedo_area":
 		damage(5)
+	if area.get_name() == "mine_area":
+		damage(5)
