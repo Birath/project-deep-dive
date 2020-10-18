@@ -19,7 +19,11 @@ radius = 50.0
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="SphereShape" id=4]
+[sub_resource type="CapsuleShape" id=4]
+radius = 1.1032
+height = 9.01761
+
+[sub_resource type="SphereShape" id=5]
 radius = 50.0
 
 [node name="Player" type="RigidBody"]
@@ -85,13 +89,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="hit_area" type="Area" parent="."]
+
+[node name="hit_shape" type="CollisionShape" parent="hit_area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.33143 )
+shape = SubResource( 4 )
+
 [node name="MapSonar" type="Area" parent="."]
 collision_layer = 512
 collision_mask = 512
 
 [node name="CollisionShape" type="CollisionShape" parent="MapSonar"]
-shape = SubResource( 4 )
-
+shape = SubResource( 5 )
 [connection signal="area_entered" from="Sonar" to="." method="_on_Sonar_area_entered"]
+[connection signal="area_entered" from="hit_area" to="." method="_on_hit_area_area_entered"]
 [connection signal="area_entered" from="MapSonar" to="submarine_interior" method="_on_MapSonar_area_entered"]
 [connection signal="area_exited" from="MapSonar" to="submarine_interior" method="_on_MapSonar_area_exited"]

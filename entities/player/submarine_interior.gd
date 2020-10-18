@@ -137,11 +137,16 @@ func _on_MapSonar_area_entered(area: Area) -> void:
 	var dot = ColorRect.new()
 	dot.visible = false
 	dot.rect_size = Vector2(5, 5)
-	if "scan_node" in area.get_groups():
-		dot.color = Color("B86D5C")
+	set_entity_color(area, dot)
 	$map_viewport/Viewport/map.add_child(dot)
 	dot.set_position(Vector2(map_x, map_y))
 	map_entities_to_areas[area] = dot
+
+func set_entity_color(area: Area, entity) -> void:
+	if "scan_node" in area.get_groups():
+		entity.color = Color("B86D5C")
+	elif "enemy" in area.get_groups():
+		entity.color = Color(1, 0, 0);
 
 
 func _on_MapSonar_area_exited(area: Area) -> void:
